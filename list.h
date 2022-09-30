@@ -10,4 +10,5 @@ void put(int data);
 int erase(int data);
 int find(int data);
 void print_list();
+void reverse_list();	
 
