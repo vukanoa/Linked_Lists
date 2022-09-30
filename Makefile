@@ -16,4 +16,6 @@ $(TARGET): $(OBJS)
 clean:
 	$(RM) \
 	$(TARGET) \
-	$(OBJS)
+	$(OBJS) \
+	.*.swp \
+	.*.un~

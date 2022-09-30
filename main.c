@@ -5,10 +5,15 @@ main ()
 {
 	int data;
 
-	printf("Which element would you like to insert?\n: ");
-	scanf("%d", &data);
+	for (int i = 0; i < 3; i++)
+	{
+		printf("Which element would you like to insert?\n: ");
+		scanf("%d", &data);
 
-	put(data);
+		push(data);
+	}
+
+	print_list();
 
 	printf("Program executed successfully!\n");
 
