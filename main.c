@@ -17,6 +17,7 @@ main()
 		printf("4. Remove from List\n");
 		printf("5. Reverse List\n");
 		printf("6. Print List\n");
+		printf("7. Generate random List\n");
 		printf("0. Exit\n");
 
 		printf("\n: ");
@@ -70,6 +71,10 @@ main()
 			case 6:
 				printf("\tCurrent List:");
 				print_list();
+				break;
+
+			case 7:
+				generate_list();
 				break;
 
 			case 0:

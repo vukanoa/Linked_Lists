@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <time.h>
 #include "list.h"
 
 Node* head = NULL;
@@ -162,3 +163,51 @@ reverse_list()
 	print_list();
 }
 
+
+void
+generate_list()
+{
+	int size;
+	char destroy;
+	Node* tmp = NULL;
+
+	if (head != NULL)
+	{
+		printf("\n\t Would you like to destroy a previous list? (1-yes, 0-no).\n");
+		printf("   !!!   WARNING: If you don't there will be memory leak!\n: ");
+		scanf("%d", &size); // Didn't want to allocate another variable
+
+		if (size == 1)
+		{
+			while (head)
+			{
+				tmp = head;
+				head = head->next;
+				free(tmp);
+			}
+		printf("\n\tPrevious List has been destroyed!\n\n");
+
+		}
+	}
+	srand(time(NULL));
+
+	printf("How many elements would you like to have?\n: ");
+	scanf("%d", &size);
+
+	for (int i = 0; i < size; i++)
+	{
+		tmp = (Node*) malloc(sizeof(Node));
+		tmp->data = rand() % 100;
+		tmp->next = NULL;
+
+		if (head == NULL)
+			head = tail = tmp;
+		else
+		{
+			tmp->next = head;
+			head = tmp;
+		}
+	}
+
+	printf("\n\tA list has been successfully generated!\n\n");
+}
