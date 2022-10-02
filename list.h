@@ -7,8 +7,10 @@ typedef struct node{
 
 void push(int data);
 void put(int data);
+void insert(int data);
 int erase(int data);
 int find(int data);
 void print_list();
 void reverse_list();	
 void generate_list();
+void sort_list();

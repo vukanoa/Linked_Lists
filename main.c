@@ -5,6 +5,7 @@ main()
 {
 	int option = -1;
 	int number;
+	char sorted = 0;
 	while (option !=0 )
 	{
 		printf("==============================================\n");
@@ -13,11 +14,13 @@ main()
 
 		printf("1. Put in List\n");
 		printf("2. Push in List\n");
-		printf("3. Search for Element\n");
-		printf("4. Remove from List\n");
-		printf("5. Reverse List\n");
-		printf("6. Print List\n");
-		printf("7. Generate random List\n");
+		printf("3. Insert in a sorted list\n");
+		printf("4. Search for Element\n");
+		printf("5. Remove from List\n");
+		printf("6. Reverse List\n");
+		printf("7. Print List\n");
+		printf("8. Generate random List\n");
+		printf("9. Sort a list\n");
 		printf("0. Exit\n");
 
 		printf("\n: ");
@@ -46,6 +49,19 @@ main()
 				break;
 
 			case 3:
+				if (sorted)
+				{
+					printf("Which element would you like to INSERT in a sorted list?\nElement: ");
+					scanf("%d<CR>", &number);
+
+					insert(number);
+				}
+				else
+					printf("\n\tError: A list isn't sorted. Try to sort it first.\n\n");
+
+				break;
+
+			case 4:
 				printf("Search for Element: ");
 				scanf("%d", &number);
 				int found = find(number);
@@ -57,24 +73,29 @@ main()
 
 				break;
 
-			case 4:
+			case 5:
 				printf("Which element would you like to DELETE?\nElement: ");
 				scanf("%d<CR>", &number);
 
 				erase(number);
 				break;
 
-			case 5:
+			case 6:
 				reverse_list();	
 				break;
 
-			case 6:
+			case 7:
 				printf("\tCurrent List:");
 				print_list();
 				break;
 
-			case 7:
+			case 8:
 				generate_list();
+				break;
+
+			case 9:
+				sort_list();
+				sorted = 1;
 				break;
 
 			case 0:

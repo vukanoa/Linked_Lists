@@ -58,6 +58,31 @@ push(int data)
 }
 
 
+void
+insert(int data)
+{
+	Node* new_element = (Node*) malloc(sizeof(Node));
+	new_element->data = data;
+	new_element->next = NULL;
+
+	if (head == NULL || data < head->data)
+	{
+		new_element->next = head;
+		head = new_element;
+	}
+	else
+	{
+		Node* cur = head;
+		while (cur->next != NULL && cur->next->data < data)
+			cur = cur->next;
+
+		new_element->next = cur->next;
+		cur->next = new_element;
+	}
+	printf("\n\tElement %d has been properly inserted to List!\n\n", data);
+}
+
+
 int
 erase(int data)
 {
@@ -211,3 +236,28 @@ generate_list()
 
 	printf("\n\tA list has been successfully generated!\n\n");
 }
+
+void
+sort_list()
+{
+	// Selection sort O(n^2)
+	Node* i, *j;
+	int tmp;
+
+	for (i = head; i->next != NULL; i = i->next)
+	{
+		for (j = i->next; j != NULL; j = j->next)
+		{
+			if (i->data > j->data)
+			{
+				tmp = i->data;
+				i->data = j->data;
+				j->data = tmp;
+			}
+		}
+	}
+
+	printf("\n\tA list has been successfully sorted!\n\n");
+}
+
+
