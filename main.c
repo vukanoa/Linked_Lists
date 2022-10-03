@@ -12,23 +12,24 @@ main()
 		printf("============== SELECT AN OPTION ==============\n");
 		printf("==============================================\n");
 
-		printf("1. Put in List\n");
-		printf("2. Push in List\n");
-		printf("3. Insert in a sorted list\n");
-		printf("4. Search for Element\n");
-		printf("5. Remove from List\n");
-		printf("6. Reverse List\n");
-		printf("7. Print List\n");
-		printf("8. Generate random List\n");
-		printf("9. Sort a list\n");
-		printf("0. Exit\n");
+		printf("\t    1. Put in List\n");
+		printf("\t    2. Push in List\n");
+		printf("\t    3. Insert in a sorted list\n");
+		printf("\t    4. Search for Element\n");
+		printf("\t    5. Remove from List\n");
+		printf("\t    6. Reverse List\n");
+		printf("\t    7. Print List\n");
+		printf("\t    8. Generate random List\n");
+		printf("\t    9. Selection Sort a list\n");
+		printf("\t   10. Bubble Sort a list\n");
+		printf("\t    0. Exit\n");
 
 		printf("\n: ");
 		scanf("%d", &option);
 
 		if (option < 0)
 		{
-			printf("\nNEMA TE OPCIJE!\n\n");
+			printf("\nThat option doesn't exist! Try again.\n\n");
 			continue;
 		}
 
@@ -94,7 +95,12 @@ main()
 				break;
 
 			case 9:
-				sort_list();
+				selection_sort();
+				sorted = 1;
+				break;
+
+			case 10:
+				bubble_sort();
 				sorted = 1;
 				break;
 
@@ -106,5 +112,4 @@ main()
 	}
 
     return 0;
-
 }

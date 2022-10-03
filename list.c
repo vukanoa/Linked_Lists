@@ -238,10 +238,10 @@ generate_list()
 }
 
 void
-sort_list()
+selection_sort()
 {
 	// Selection sort O(n^2)
-	Node* i, *j;
+	Node *i, *j;
 	int tmp;
 
 	for (i = head; i->next != NULL; i = i->next)
@@ -257,7 +257,44 @@ sort_list()
 		}
 	}
 
-	printf("\n\tA list has been successfully sorted!\n\n");
+	printf("\n\tA list has been successfully Selection-sorted!\n\n");
 }
 
 
+void
+bubble_sort()
+{
+	// Bubble sort O(n^2)
+	int swapped;
+	Node* cur;
+	Node* last_sorted = NULL;
+
+	if (head == NULL)
+		return;
+
+	do
+	{
+		swapped = 0;
+		cur = head;
+
+		while (cur->next != last_sorted)
+		{
+			if (cur->data > cur->next->data)
+			{
+				swap(cur, cur->next);
+				swapped = 1;
+			}
+			cur = cur->next;
+		}
+		last_sorted = cur;
+	} while(swapped);
+
+	printf("\n\tA list has been successfully Bubble-sorted!\n\n");
+}
+
+void swap(Node *a, Node *b)
+{
+	int tmp = a->data;
+	a->data = b->data;
+	b->data = tmp;
+}
