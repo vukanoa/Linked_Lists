@@ -6,19 +6,19 @@ typedef struct node{
 }Node;
 
 // List functions
-void push(int data);
-void put(int data);
-void insert(int data);
+void push   (Node** head, int data, Node** tail);
+void put    (Node** head, int data, Node** tail);
+void insert (Node** head, int data);
 
-int erase(int data);
-int find(int data);
+int erase	(Node** head, int data);
+int find	(Node*  head, int data);
 
-void print_list();
-void reverse_list();	
-void generate_list();
+void print_list		(Node*  head);
+void reverse_list	(Node** head);	
+void generate_list	(Node** head, Node** tail);
 
-void selection_sort();
-void bubble_sort();
+void selection_sort (Node* head);
+void bubble_sort	(Node* head);
 
 // Util function
 void swap();

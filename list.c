@@ -2,56 +2,24 @@
 #include <time.h>
 #include "list.h"
 
-Node* head = NULL;
-Node* tail = NULL;
-
-
 void
-put(int data)
+push(Node** head, int data, Node** tail)
 {
-   if (head == NULL)
-   {
-       head = (Node*) malloc(sizeof(Node));
-       head->data = data;
-       head->next = NULL;
-
-	   tail = head;
-   }
-   else
-   {
-       Node* tmp = (Node*) malloc(sizeof(Node));
-       tmp->data = data;
-       tmp->next = NULL;
-
-       if (head->next == NULL)
-           head->next = tmp;
-
-       tail->next = tmp;
-       tail = tmp;
-   }
-
-   printf("\n\tElement %d has been put to List\n\n", data);
-}
-
-
-void
-push(int data)
-{
-	if (head == NULL)
+	if ((*head) == NULL)
 	{
-		head = (Node*) malloc(sizeof(Node));
-		head->data = data;
-		head->next = NULL;
+		(*head) = (Node*) malloc(sizeof(Node));
+		(*head)->data = data;
+		(*head)->next = NULL;
 
-		tail = head;
+		(*tail) = (*head);
 	}
 	else
 	{
 		Node* tmp = (Node*) malloc(sizeof(Node));
 		tmp->data = data;
-		tmp->next = head;
+		tmp->next = (*head);
 
-		head = tmp;
+		(*head) = tmp;
 	}
 
 	printf("\n\tElement %d has been pushed to List\n\n", data);
@@ -59,20 +27,48 @@ push(int data)
 
 
 void
-insert(int data)
+put(Node** head, int data, Node** tail)
+{
+   if ((*head) == NULL)
+   {
+       (*head) = (Node*) malloc(sizeof(Node));
+       (*head)->data = data;
+       (*head)->next = NULL;
+
+	   (*tail) = (*head);
+   }
+   else
+   {
+       Node* tmp = (Node*) malloc(sizeof(Node));
+       tmp->data = data;
+       tmp->next = NULL;
+
+       if ((*head)->next == NULL)
+           (*head)->next = tmp;
+
+       (*tail)->next = tmp;
+       (*tail) = tmp;
+   }
+
+   printf("\n\tElement %d has been put to List\n\n", data);
+}
+
+
+void
+insert(Node** head, int data)
 {
 	Node* new_element = (Node*) malloc(sizeof(Node));
 	new_element->data = data;
 	new_element->next = NULL;
 
-	if (head == NULL || data < head->data)
+	if ((*head) == NULL || data < (*head)->data)
 	{
-		new_element->next = head;
-		head = new_element;
+		new_element->next = (*head);
+		(*head) = new_element;
 	}
 	else
 	{
-		Node* cur = head;
+		Node* cur = (*head);
 		while (cur->next != NULL && cur->next->data < data)
 			cur = cur->next;
 
@@ -84,11 +80,11 @@ insert(int data)
 
 
 int
-erase(int data)
+erase(Node** head, int data)
 {
 	printf("\n\t");
 
-	if (!head)
+	if (!((*head)))
 	{
 		printf("List is empty!");
 		printf("\n\n");
@@ -97,13 +93,13 @@ erase(int data)
 	}
 
 	Node* prev = NULL;
-	Node* cur = head;
+	Node* cur = ((*head));
 	while (cur)
 	{
 		if (cur->data == data)
 		{
-			if (cur == head)
-				head = cur->next;
+			if (cur == ((*head)))
+				((*head)) = cur->next;
 			else
 				prev->next = cur->next;
 
@@ -127,7 +123,7 @@ erase(int data)
 
 
 int
-find(int data)
+find(Node* head, int data)
 {
     Node* cur = head;
 
@@ -144,7 +140,7 @@ find(int data)
 
 
 void
-print_list()
+print_list(Node* head)
 {
     Node* cur = head;
 	printf("\n\t");
@@ -161,18 +157,19 @@ print_list()
     printf("\n\n");
 }
 
+
 void
-reverse_list()
+reverse_list(Node** head)
 {
 	printf("\n\tList has been reversed successfully!\n\n");
 
 	printf("\tPrevious order:");
-	print_list();
+	print_list(*head);
 
 	Node* p, *q, *r;
 	p = NULL;
-	q = head;
-	r = head->next;
+	q = (*head);
+	r = (*head)->next;
 
 	while (r != NULL)
 	{
@@ -182,21 +179,20 @@ reverse_list()
 		r = q->next;
 		q->next = p;
 	}
-	head = q;
+	(*head) = q;
 
 	printf("\tCurrent order:");
-	print_list();
+	print_list(*head);
 }
 
 
 void
-generate_list()
+generate_list(Node** head, Node** tail)
 {
-	int size;
-	char destroy;
+	int size = -1;
 	Node* tmp = NULL;
 
-	if (head != NULL)
+	if ((*head) != NULL)
 	{
 		printf("\n\t Would you like to destroy a previous list? (1-yes, 0-no).\n");
 		printf("   !!!   WARNING: If you don't there will be memory leak!\n: ");
@@ -204,20 +200,33 @@ generate_list()
 
 		if (size == 1)
 		{
-			while (head)
+			while ((*head))
 			{
-				tmp = head;
-				head = head->next;
+				tmp = (*head);
+				(*head) = (*head)->next;
 				free(tmp);
 			}
-		printf("\n\tPrevious List has been destroyed!\n\n");
 
+			printf("\n\tPrevious List has been destroyed!\n\n");
 		}
 	}
 	srand(time(NULL));
 
-	printf("How many elements would you like to have?\n: ");
-	scanf("%d", &size);
+	for(;;)
+	{
+		printf("How many elements would you like to have?\n: ");
+		scanf("%d", &size);
+
+		if (size < 0)
+			printf("\n\tUnable to make a list of size \"%d\". Try again.\n\n: ", size);
+		else if (size == 0)
+		{
+			printf("\n\tOperation \"Generate random List\" was canceled.\n\n: ", size);
+			return;
+		}
+		else
+			break;
+	}
 
 	for (int i = 0; i < size; i++)
 	{
@@ -225,20 +234,21 @@ generate_list()
 		tmp->data = rand() % 100;
 		tmp->next = NULL;
 
-		if (head == NULL)
-			head = tail = tmp;
+		if ((*head) == NULL)
+			(*head) = (*tail) = tmp;
 		else
 		{
-			tmp->next = head;
-			head = tmp;
+			tmp->next = (*head);
+			(*head) = tmp;
 		}
 	}
 
 	printf("\n\tA list has been successfully generated!\n\n");
 }
 
+
 void
-selection_sort()
+selection_sort(Node* head)
 {
 	// Selection sort O(n^2)
 	Node *i, *j;
@@ -262,7 +272,7 @@ selection_sort()
 
 
 void
-bubble_sort()
+bubble_sort(Node* head)
 {
 	// Bubble sort O(n^2)
 	int swapped;
@@ -292,7 +302,9 @@ bubble_sort()
 	printf("\n\tA list has been successfully Bubble-sorted!\n\n");
 }
 
-void swap(Node *a, Node *b)
+
+void
+swap(Node *a, Node *b)
 {
 	int tmp = a->data;
 	a->data = b->data;

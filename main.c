@@ -1,8 +1,14 @@
 #include "list.h"
+#define HIGHEST_OPTION 10
+#define LOWEST_OPTION 0
 
 int
 main()
 {
+	Node* head = NULL;
+	Node* tail = NULL;
+	Node* tmp  = NULL;
+
 	int option = -1;
 	int number;
 	char sorted = 0;
@@ -12,8 +18,8 @@ main()
 		printf("============== SELECT AN OPTION ==============\n");
 		printf("==============================================\n");
 
-		printf("\t    1. Put in List\n");
-		printf("\t    2. Push in List\n");
+		printf("\t    1. Push in List\n");
+		printf("\t    2. Put in List\n");
 		printf("\t    3. Insert in a sorted list\n");
 		printf("\t    4. Search for Element\n");
 		printf("\t    5. Remove from List\n");
@@ -27,26 +33,44 @@ main()
 		printf("\n: ");
 		scanf("%d", &option);
 
-		if (option < 0)
+		if (option < LOWEST_OPTION || option > HIGHEST_OPTION)
 		{
-			printf("\nThat option doesn't exist! Try again.\n\n");
+			printf("\n\tERROR: That option doesn't exist! Try again.\n\n");
 			continue;
 		}
 
 		switch (option)
 		{
 			case 1:
-				printf("Which element would you like to PUT?\nElement: ");
-				scanf("%d<CR>", &number);
-
-				put(number);
-				break;
-
-			case 2:
 				printf("Which element would you like to PUSH?\nElement: ");
 				scanf("%d<CR>", &number);
 
-				push(number);
+				push(&head, number, &tail);
+
+				if (head->data > head->next->data)
+					sorted = 0;
+				break;
+
+			case 2:
+				printf("Which element would you like to PUT?\nElement: ");
+				scanf("%d<CR>", &number);
+
+				put(&head, number, &tail);
+				tmp = head;
+				for(;;)
+				{
+					if (tmp->next == tail)
+					{
+						if (tmp->data > tail->data)
+						{
+							sorted = 0;
+							break;
+						}
+					}
+					else
+						tmp = tmp->next;
+				}
+
 				break;
 
 			case 3:
@@ -55,17 +79,17 @@ main()
 					printf("Which element would you like to INSERT in a sorted list?\nElement: ");
 					scanf("%d<CR>", &number);
 
-					insert(number);
+					insert(&head, number);
 				}
 				else
-					printf("\n\tError: A list isn't sorted. Try to sort it first.\n\n");
+					printf("\n\tERROR: A list isn't sorted. Try to sort it first.\n\n");
 
 				break;
 
 			case 4:
 				printf("Search for Element: ");
 				scanf("%d", &number);
-				int found = find(number);
+				int found = find(head, number);
 
 				if (found)
 					printf("\n\tElement %d exists in the List!\n\n", number);
@@ -78,29 +102,29 @@ main()
 				printf("Which element would you like to DELETE?\nElement: ");
 				scanf("%d<CR>", &number);
 
-				erase(number);
+				erase(&head, number);
 				break;
 
 			case 6:
-				reverse_list();	
+				reverse_list(&head);	
 				break;
 
 			case 7:
 				printf("\tCurrent List:");
-				print_list();
+				print_list(head);
 				break;
 
 			case 8:
-				generate_list();
+				generate_list(&head, &tail);
 				break;
 
 			case 9:
-				selection_sort();
+				selection_sort(head);
 				sorted = 1;
 				break;
 
 			case 10:
-				bubble_sort();
+				bubble_sort(head);
 				sorted = 1;
 				break;
 
