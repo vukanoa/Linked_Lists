@@ -194,21 +194,8 @@ generate_list(Node** head, Node** tail)
 
 	if ((*head) != NULL)
 	{
-		printf("\n\t Would you like to destroy a previous list? (1-yes, 0-no).\n");
-		printf("   !!!   WARNING: If you don't there will be memory leak!\n: ");
-		scanf("%d", &size); // Didn't want to allocate another variable
-
-		if (size == 1)
-		{
-			while ((*head))
-			{
-				tmp = (*head);
-				(*head) = (*head)->next;
-				free(tmp);
-			}
-
-			printf("\n\tPrevious List has been destroyed!\n\n");
-		}
+		printf("   !!!   WARNING: Another list already exists. Destroy it to prevent memory leak!\n: ");
+		destroy_list(head);
 	}
 	srand(time(NULL));
 
@@ -309,4 +296,36 @@ swap(Node *a, Node *b)
 	int tmp = a->data;
 	a->data = b->data;
 	b->data = tmp;
+}
+
+
+void
+destroy_list(Node** head)
+{
+	if ((*head) == NULL)
+	{
+		printf("\n\tUnable to destroy a non-existant List.\n\n");
+		return;
+	}
+
+	Node* tmp = NULL;
+
+	int destroy;
+	printf("Are you sure you want to DESTROY a list? [yes - 1, no - 0]\n: ");
+	scanf("%d", &destroy);
+
+	if (!destroy)
+	{
+		printf("\n\tOperation \"Destroy a list\" was canceled.\n\n");
+		return;
+	}
+	
+	while ((*head))
+	{
+		tmp = (*head);
+		(*head) = (*head)->next;
+		free(tmp);
+	}
+
+	printf("\n\tA list has been destroyed!\n\n");
 }

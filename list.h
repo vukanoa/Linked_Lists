@@ -16,6 +16,7 @@ int find	(Node*  head, int data);
 void print_list		(Node*  head);
 void reverse_list	(Node** head);	
 void generate_list	(Node** head, Node** tail);
+void destroy_list	(Node** head);
 
 void selection_sort (Node* head);
 void bubble_sort	(Node* head);

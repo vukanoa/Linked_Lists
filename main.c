@@ -1,5 +1,5 @@
 #include "list.h"
-#define HIGHEST_OPTION 10
+#define HIGHEST_OPTION 11
 #define LOWEST_OPTION 0
 
 int
@@ -28,6 +28,7 @@ main()
 		printf("\t    8. Generate random List\n");
 		printf("\t    9. Selection Sort a list\n");
 		printf("\t   10. Bubble Sort a list\n");
+		printf("\t   11. Destroy a list\n");
 		printf("\t    0. Exit\n");
 
 		printf("\n: ");
@@ -47,8 +48,8 @@ main()
 
 				push(&head, number, &tail);
 
-				if (head->data > head->next->data)
-					sorted = 0;
+				//if (head->data > head->next->data)
+					//sorted = 0;
 				break;
 
 			case 2:
@@ -126,6 +127,10 @@ main()
 			case 10:
 				bubble_sort(head);
 				sorted = 1;
+				break;
+
+			case 11:
+				destroy_list(&head);
 				break;
 
 			case 0:
