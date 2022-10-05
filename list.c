@@ -235,6 +235,38 @@ generate_list(Node** head, Node** tail)
 
 
 void
+destroy_list(Node** head)
+{
+	if ((*head) == NULL)
+	{
+		printf("\n\tUnable to destroy a non-existant List.\n\n");
+		return;
+	}
+
+	Node* tmp = NULL;
+
+	int destroy;
+	printf("Are you sure you want to DESTROY a list? [yes - 1, no - 0]\n: ");
+	scanf("%d", &destroy);
+
+	if (!destroy)
+	{
+		printf("\n\tOperation \"Destroy a list\" was canceled.\n\n");
+		return;
+	}
+	
+	while ((*head))
+	{
+		tmp = (*head);
+		(*head) = (*head)->next;
+		free(tmp);
+	}
+
+	printf("\n\tA list has been destroyed!\n\n");
+}
+
+
+void
 selection_sort(Node* head)
 {
 	// Selection sort O(n^2)
@@ -299,33 +331,44 @@ swap(Node *a, Node *b)
 }
 
 
-void
-destroy_list(Node** head)
+Node*
+sorted_merge(Node* a, Node* b)
 {
-	if ((*head) == NULL)
+	Node* ret_head = NULL;
+	Node* tail = NULL;
+
+	// Find head with lower data
+	if (a->data < b->data)
 	{
-		printf("\n\tUnable to destroy a non-existant List.\n\n");
-		return;
+		ret_head = tail = a;
+		a = a->next;
+	}
+	else
+	{
+		ret_head = tail = b;
+		b = b->next;
 	}
 
-	Node* tmp = NULL;
-
-	int destroy;
-	printf("Are you sure you want to DESTROY a list? [yes - 1, no - 0]\n: ");
-	scanf("%d", &destroy);
-
-	if (!destroy)
+	while(a != NULL && b != NULL)
 	{
-		printf("\n\tOperation \"Destroy a list\" was canceled.\n\n");
-		return;
-	}
-	
-	while ((*head))
-	{
-		tmp = (*head);
-		(*head) = (*head)->next;
-		free(tmp);
+		if (a->data < b->data)
+		{
+			tail->next = a;
+			tail = tail->next;
+			a = a->next;
+		}
+		else
+		{
+			tail->next = b;
+			tail = tail->next;
+			b = b->next;
+		}
 	}
 
-	printf("\n\tA list has been destroyed!\n\n");
+	if (a == NULL)
+		tail->next = b;
+	else
+		tail->next = a;
+
+	return ret_head;
 }

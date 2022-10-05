@@ -23,3 +23,4 @@ void bubble_sort	(Node* head);
 
 // Util function
 void swap();
+Node* sorted_merge(Node* a, Node* b);
