@@ -1,26 +1,26 @@
 #include <stdio.h>
 
-typedef struct node{
+struct Node{
     int data;
-    struct node* next;
-}Node;
+    struct Node* next;
+};
 
 // List functions
-void push   (Node** head, int data, Node** tail);
-void put    (Node** head, int data, Node** tail);
-void insert (Node** head, int data);
+void push   (struct Node** head, int data, struct Node** tail);
+void put    (struct Node** head, int data, struct Node** tail);
+void insert (struct Node** head, int data);
 
-int erase	(Node** head, int data);
-int find	(Node*  head, int data);
+int erase	(struct Node** head, int data);
+int find	(struct Node*  head, int data);
 
-void print_list		(Node*  head);
-void reverse_list	(Node** head);	
-void generate_list	(Node** head, Node** tail);
-void destroy_list	(Node** head);
+void print_list		(struct Node*  head);
+void reverse_list	(struct Node** head);	
+void generate_list	(struct Node** head, struct Node** tail);
+void destroy_list	(struct Node** head);
 
-void selection_sort (Node* head);
-void bubble_sort	(Node* head);
+void selection_sort (struct Node* head);
+void bubble_sort	(struct Node* head);
 
-// Util function
+// Util functions
 void swap();
-Node* sorted_merge(Node* a, Node* b);
+struct Node* sorted_merge(struct Node* a, struct Node* b);

@@ -3,11 +3,11 @@
 #include "list.h"
 
 void
-push(Node** head, int data, Node** tail)
+push(struct Node** head, int data, struct Node** tail)
 {
 	if ((*head) == NULL)
 	{
-		(*head) = (Node*) malloc(sizeof(Node));
+		(*head) = (struct Node*) malloc(sizeof(struct Node));
 		(*head)->data = data;
 		(*head)->next = NULL;
 
@@ -15,7 +15,7 @@ push(Node** head, int data, Node** tail)
 	}
 	else
 	{
-		Node* tmp = (Node*) malloc(sizeof(Node));
+		struct Node* tmp = (struct Node*) malloc(sizeof(struct Node));
 		tmp->data = data;
 		tmp->next = (*head);
 
@@ -27,11 +27,11 @@ push(Node** head, int data, Node** tail)
 
 
 void
-put(Node** head, int data, Node** tail)
+put(struct Node** head, int data, struct Node** tail)
 {
    if ((*head) == NULL)
    {
-       (*head) = (Node*) malloc(sizeof(Node));
+       (*head) = (struct Node*) malloc(sizeof(struct Node));
        (*head)->data = data;
        (*head)->next = NULL;
 
@@ -39,7 +39,7 @@ put(Node** head, int data, Node** tail)
    }
    else
    {
-       Node* tmp = (Node*) malloc(sizeof(Node));
+       struct Node* tmp = (struct Node*) malloc(sizeof(struct Node));
        tmp->data = data;
        tmp->next = NULL;
 
@@ -55,9 +55,9 @@ put(Node** head, int data, Node** tail)
 
 
 void
-insert(Node** head, int data)
+insert(struct Node** head, int data)
 {
-	Node* new_element = (Node*) malloc(sizeof(Node));
+	struct Node* new_element = (struct Node*) malloc(sizeof(struct Node));
 	new_element->data = data;
 	new_element->next = NULL;
 
@@ -68,7 +68,7 @@ insert(Node** head, int data)
 	}
 	else
 	{
-		Node* cur = (*head);
+		struct Node* cur = (*head);
 		while (cur->next != NULL && cur->next->data < data)
 			cur = cur->next;
 
@@ -80,7 +80,7 @@ insert(Node** head, int data)
 
 
 int
-erase(Node** head, int data)
+erase(struct Node** head, int data)
 {
 	printf("\n\t");
 
@@ -92,8 +92,8 @@ erase(Node** head, int data)
 		return -1;
 	}
 
-	Node* prev = NULL;
-	Node* cur = ((*head));
+	struct Node* prev = NULL;
+	struct Node* cur = ((*head));
 	while (cur)
 	{
 		if (cur->data == data)
@@ -123,9 +123,9 @@ erase(Node** head, int data)
 
 
 int
-find(Node* head, int data)
+find(struct Node* head, int data)
 {
-    Node* cur = head;
+    struct Node* cur = head;
 
     while (cur)
     {
@@ -140,9 +140,9 @@ find(Node* head, int data)
 
 
 void
-print_list(Node* head)
+print_list(struct Node* head)
 {
-    Node* cur = head;
+    struct Node* cur = head;
 	printf("\n\t");
 
 	if (head == NULL)
@@ -159,14 +159,14 @@ print_list(Node* head)
 
 
 void
-reverse_list(Node** head)
+reverse_list(struct Node** head)
 {
 	printf("\n\tList has been reversed successfully!\n\n");
 
 	printf("\tPrevious order:");
 	print_list(*head);
 
-	Node* p, *q, *r;
+	struct Node* p, *q, *r;
 	p = NULL;
 	q = (*head);
 	r = (*head)->next;
@@ -187,10 +187,10 @@ reverse_list(Node** head)
 
 
 void
-generate_list(Node** head, Node** tail)
+generate_list(struct Node** head, struct Node** tail)
 {
 	int size = -1;
-	Node* tmp = NULL;
+	struct Node* tmp = NULL;
 
 	if ((*head) != NULL)
 	{
@@ -217,7 +217,7 @@ generate_list(Node** head, Node** tail)
 
 	for (int i = 0; i < size; i++)
 	{
-		tmp = (Node*) malloc(sizeof(Node));
+		tmp = (struct Node*) malloc(sizeof(struct Node));
 		tmp->data = rand() % 100;
 		tmp->next = NULL;
 
@@ -235,7 +235,7 @@ generate_list(Node** head, Node** tail)
 
 
 void
-destroy_list(Node** head)
+destroy_list(struct Node** head)
 {
 	if ((*head) == NULL)
 	{
@@ -243,7 +243,7 @@ destroy_list(Node** head)
 		return;
 	}
 
-	Node* tmp = NULL;
+	struct Node* tmp = NULL;
 
 	int destroy;
 	printf("Are you sure you want to DESTROY a list? [yes - 1, no - 0]\n: ");
@@ -267,10 +267,10 @@ destroy_list(Node** head)
 
 
 void
-selection_sort(Node* head)
+selection_sort(struct Node* head)
 {
 	// Selection sort O(n^2)
-	Node *i, *j;
+	struct Node *i, *j;
 	int tmp;
 
 	for (i = head; i->next != NULL; i = i->next)
@@ -291,12 +291,12 @@ selection_sort(Node* head)
 
 
 void
-bubble_sort(Node* head)
+bubble_sort(struct Node* head)
 {
 	// Bubble sort O(n^2)
 	int swapped;
-	Node* cur;
-	Node* last_sorted = NULL;
+	struct Node* cur;
+	struct Node* last_sorted = NULL;
 
 	if (head == NULL)
 		return;
@@ -323,7 +323,7 @@ bubble_sort(Node* head)
 
 
 void
-swap(Node *a, Node *b)
+swap(struct Node *a, struct Node *b)
 {
 	int tmp = a->data;
 	a->data = b->data;
@@ -331,11 +331,11 @@ swap(Node *a, Node *b)
 }
 
 
-Node*
-sorted_merge(Node* a, Node* b)
+struct Node*
+sorted_merge(struct Node* a, struct Node* b)
 {
-	Node* ret_head = NULL;
-	Node* tail = NULL;
+	struct Node* ret_head = NULL;
+	struct Node* tail = NULL;
 
 	// Find head with lower data
 	if (a->data < b->data)
