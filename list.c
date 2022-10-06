@@ -269,6 +269,12 @@ destroy_list(struct Node** head)
 void
 selection_sort(struct Node* head)
 {
+	if (head == NULL || head->next == NULL)
+	{
+		printf("\n\tThere's nothing to sort!\n\n");
+		return;
+	}
+
 	// Selection sort O(n^2)
 	struct Node *i, *j;
 	int tmp;
@@ -293,6 +299,12 @@ selection_sort(struct Node* head)
 void
 bubble_sort(struct Node* head)
 {
+	if (head == NULL || head->next == NULL)
+	{
+		printf("\n\tThere's nothing to sort!\n\n");
+		return;
+	}
+
 	// Bubble sort O(n^2)
 	int swapped;
 	struct Node* cur;
@@ -323,6 +335,30 @@ bubble_sort(struct Node* head)
 
 
 void
+merge_sort(struct Node** head) // 5 2 4
+{
+	// O(n * logn)
+	if ((*head) == NULL || (*head)->next == NULL)
+		return;
+
+	// Split
+	struct Node* mid = mid_node(*head);
+
+	struct Node* a = (*head);
+	struct Node* b = mid->next;
+
+	// Split at the mid
+	mid->next = NULL;
+
+	// Sort left and right half recursively
+	merge_sort(&a);
+	merge_sort(&b);
+
+	(*head) = sorted_merge(a, b);
+}
+
+
+void
 swap(struct Node *a, struct Node *b)
 {
 	int tmp = a->data;
@@ -349,6 +385,7 @@ sorted_merge(struct Node* a, struct Node* b)
 		b = b->next;
 	}
 
+	// Concatenate in ascending order
 	while(a != NULL && b != NULL)
 	{
 		if (a->data < b->data)
@@ -371,4 +408,19 @@ sorted_merge(struct Node* a, struct Node* b)
 		tail->next = a;
 
 	return ret_head;
+}
+
+struct Node*
+mid_node(struct Node* head)
+{
+	struct Node* slow = head;
+	struct Node* fast = head->next;
+
+	if (fast != NULL && fast->next != NULL)
+	{
+		slow = slow->next;
+		fast = fast->next->next;
+	}
+
+	return slow;
 }

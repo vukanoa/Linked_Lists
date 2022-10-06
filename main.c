@@ -1,5 +1,5 @@
 #include "list.h"
-#define HIGHEST_OPTION 11
+#define HIGHEST_OPTION 12
 #define LOWEST_OPTION 0
 
 int
@@ -12,7 +12,7 @@ main()
 	int option = -1;
 	int number;
 	char sorted = 0;
-	while (option !=0 )
+	while (option != 0)
 	{
 		printf("==============================================\n");
 		printf("============== SELECT AN OPTION ==============\n");
@@ -28,7 +28,8 @@ main()
 		printf("\t    8. Generate random List\n");
 		printf("\t    9. Selection Sort a list\n");
 		printf("\t   10. Bubble Sort a list\n");
-		printf("\t   11. Destroy a list\n");
+		printf("\t   11. Merge Sort a list\n");
+		printf("\t   12. Destroy a list\n");
 		printf("\t    0. Exit\n");
 
 		printf("\n: ");
@@ -133,6 +134,16 @@ main()
 				break;
 
 			case 11:
+				merge_sort(&head);
+				sorted = 1;
+				if (head == NULL || head->next == NULL)
+					printf("\n\tThere's nothing to sort!\n\n");
+				else
+					printf("\n\tA List has been successfully Merge-sorted!\n\n");
+
+				break;
+
+			case 12: 
 				destroy_list(&head);
 				break;
 
@@ -140,7 +151,6 @@ main()
 				option = 0;
 				continue;
 		}
-
 	}
 
     return 0;

@@ -18,9 +18,11 @@ void reverse_list	(struct Node** head);
 void generate_list	(struct Node** head, struct Node** tail);
 void destroy_list	(struct Node** head);
 
-void selection_sort (struct Node* head);
-void bubble_sort	(struct Node* head);
+void selection_sort	(struct Node*  head);
+void bubble_sort	(struct Node*  head);
+void merge_sort		(struct Node** head);
 
 // Util functions
 void swap();
-struct Node* sorted_merge(struct Node* a, struct Node* b);
+struct Node* sorted_merge	(struct Node* a, struct Node* b);
+struct Node* mid_node		(struct Node* head);
