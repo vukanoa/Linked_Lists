@@ -5,7 +5,7 @@ struct Node{
     struct Node* next;
 };
 
-// List functions
+// Singly Linked List functions
 void push   (struct Node** head, int data, struct Node** tail);
 void put    (struct Node** head, int data, struct Node** tail);
 void insert (struct Node** head, int data);
@@ -21,8 +21,10 @@ void destroy_list	(struct Node** head);
 void selection_sort	(struct Node*  head);
 void bubble_sort	(struct Node*  head);
 void merge_sort		(struct Node** head);
+void quick_sort		(struct Node*  head, struct Node* tail);
 
 // Util functions
 void swap();
 struct Node* sorted_merge	(struct Node* a, struct Node* b);
 struct Node* mid_node		(struct Node* head);
+struct Node* partition		(struct Node* front, struct Node* right);

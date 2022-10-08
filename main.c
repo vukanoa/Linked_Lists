@@ -1,5 +1,6 @@
-#include "list.h"
-#define HIGHEST_OPTION 12
+#include "singly_linked_list.h"
+#include "doubly_linked_list.h"
+#define HIGHEST_OPTION 13
 #define LOWEST_OPTION 0
 
 int
@@ -29,7 +30,8 @@ main()
 		printf("\t    9. Selection Sort a list\n");
 		printf("\t   10. Bubble Sort a list\n");
 		printf("\t   11. Merge Sort a list\n");
-		printf("\t   12. Destroy a list\n");
+		printf("\t   12. Quick Sort a list\n");
+		printf("\t   13. Destroy a list\n");
 		printf("\t    0. Exit\n");
 
 		printf("\n: ");
@@ -143,7 +145,17 @@ main()
 
 				break;
 
-			case 12: 
+			case 12:
+				quick_sort(head, tail);
+				sorted = 1;
+				if (head == NULL || head->next == NULL)
+					printf("\n\tThere's nothing to sort!\n\n");
+				else
+					printf("\n\tA List has been successfully Quick-sorted!\n\n");
+
+				break;
+
+			case 13: 
 				destroy_list(&head);
 				break;
 
@@ -152,6 +164,17 @@ main()
 				continue;
 		}
 	}
+	printf("\n\tDoubly Linked Lists: \n");
+
+	struct d_Node* d_head = NULL;
+	struct d_Node* d_tail = NULL;
+	d_put(&d_head, 5, &d_tail);
+	d_put(&d_head, 3, &d_tail);
+	d_put(&d_head, 2, &d_tail);
+	d_put(&d_head, 9, &d_tail);
+	d_put(&d_head, 1, &d_tail);
+
+	d_print_list(d_head);
 
     return 0;
 }

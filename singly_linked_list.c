@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <time.h>
-#include "list.h"
+#include "singly_linked_list.h"
 
 void
 push(struct Node** head, int data, struct Node** tail)
@@ -42,9 +42,6 @@ put(struct Node** head, int data, struct Node** tail)
        struct Node* tmp = (struct Node*) malloc(sizeof(struct Node));
        tmp->data = data;
        tmp->next = NULL;
-
-       if ((*head)->next == NULL)
-           (*head)->next = tmp;
 
        (*tail)->next = tmp;
        (*tail) = tmp;
@@ -208,7 +205,7 @@ generate_list(struct Node** head, struct Node** tail)
 			printf("\n\tUnable to make a list of size \"%d\". Try again.\n\n: ", size);
 		else if (size == 0)
 		{
-			printf("\n\tOperation \"Generate random List\" was canceled.\n\n: ", size);
+			printf("\n\tOperation \"Generate random List\" was canceled.\n\n: ");
 			return;
 		}
 		else
@@ -424,3 +421,46 @@ mid_node(struct Node* head)
 
 	return slow;
 }
+
+void
+quick_sort(struct Node* head, struct Node* tail)
+{
+	if (head == tail)
+		return;
+
+	if (head->next == tail)
+	{
+		if (tail->data < head->data)
+			swap(head, tail);
+
+		return;
+	}
+
+	struct Node* pivot = partition(head, tail);
+	quick_sort(head		  , pivot);
+	quick_sort(pivot->next, tail);
+}
+
+
+struct Node*
+partition(struct Node* front, struct Node* right)
+{
+	struct Node* cur_front = front;
+	struct Node* left = front->next;
+
+	while(left != right)
+	{
+		if (left->data < right->data)
+		{
+			swap(cur_front, left);
+			cur_front = cur_front->next;
+		}
+		left = left->next;
+	}
+
+	if (right->data < cur_front->data)
+		swap(cur_front, right);
+
+	return cur_front;
+}
+
