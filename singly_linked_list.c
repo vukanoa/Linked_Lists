@@ -77,15 +77,13 @@ insert(struct Node** head, int data)
 
 
 int
-erase(struct Node** head, int data)
+erase(struct Node** head, int data, struct Node** tail)
 {
 	printf("\n\t");
 
-	if (!((*head)))
+	if ((*head) == NULL)
 	{
-		printf("List is empty!");
-		printf("\n\n");
-
+		printf("Unable to delete! List is empty.\n\n");
 		return -1;
 	}
 
@@ -97,8 +95,13 @@ erase(struct Node** head, int data)
 		{
 			if (cur == ((*head)))
 				((*head)) = cur->next;
-			else
+			else // Ovde mora da se obradi i tail
+			{
+				if (cur == (*tail))
+					(*tail) = prev;
+
 				prev->next = cur->next;
+			}
 
 			free(cur);
 

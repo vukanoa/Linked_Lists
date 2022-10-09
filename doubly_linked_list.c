@@ -58,17 +58,17 @@ d_put(struct d_Node** head, int data, struct d_Node** tail)
 void
 d_print_list(struct d_Node* head)
 {
-    struct d_Node* cur = head;
+	struct d_Node* cur = head;
 	printf("\n\t");
 
 	if (head == NULL)
 		printf("Empty");
-	
-    while (cur)
-    {
-        printf("%d ", cur->data);
 
-        cur = cur->next;
-    }
-    printf("\n\n");
+	while (cur)
+	{
+		printf("%d ", cur->data);
+
+		cur = cur->next;
+	}
+	printf("\n\n");
 }

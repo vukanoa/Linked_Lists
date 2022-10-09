@@ -10,7 +10,7 @@ void push   (struct Node** head, int data, struct Node** tail);
 void put    (struct Node** head, int data, struct Node** tail);
 void insert (struct Node** head, int data);
 
-int erase	(struct Node** head, int data);
+int erase	(struct Node** head, int data, struct Node** tail);
 int find	(struct Node*  head, int data);
 
 void print_list		(struct Node*  head);

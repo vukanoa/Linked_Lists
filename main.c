@@ -64,15 +64,14 @@ main()
 
 				put(&head, number, &tail);
 				tmp = head;
-				for(;;)
+				while (tmp->next)
 				{
 					if (tmp->next == tail)
 					{
 						if (tmp->data > tail->data)
-						{
 							sorted = 0;
-							break;
-						}
+
+						break;
 					}
 					else
 						tmp = tmp->next;
@@ -109,7 +108,7 @@ main()
 				printf("Which element would you like to DELETE?\nElement: ");
 				scanf("%d<CR>", &number);
 
-				erase(&head, number);
+				erase(&head, number, &tail);
 				break;
 
 			case 6:

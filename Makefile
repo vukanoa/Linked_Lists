@@ -18,4 +18,5 @@ clean:
 	$(TARGET) \
 	$(OBJS) \
 	.*.swp \
-	.*.un~
+	.*.un~ \
+	my_core.*
