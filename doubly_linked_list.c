@@ -72,3 +72,59 @@ d_print_list(struct d_Node* head)
 	}
 	printf("\n\n");
 }
+
+
+int
+d_erase(struct d_Node** head, int data, struct d_Node** tail)
+{
+	if ((*head) == NULL)
+	{
+		printf("\n\tUnable to delete! Doubly Linked List is Empty.\n\n");
+		return -1;
+	}
+
+	if ((*head)->next == NULL) // Only one Node in the List
+	{
+		if ((*head)->data == data)
+		{
+			free(*head);
+			return 0;
+		}
+
+		return -1;
+	}
+	else
+	{
+		struct d_Node* tmp = (*head);
+		while (tmp)
+		{
+			if (tmp->data == data)
+			{
+				if (tmp == (*head))
+				{
+					tmp->next->prev = NULL;
+					(*head) = tmp->next;
+					tmp->next = NULL;
+					free(tmp);
+				}
+				else
+				{
+					tmp->prev->next = tmp->next;
+
+					if (tmp == (*tail))
+						(*tail) = tmp->prev;
+					else
+						tmp->next->prev = tmp->prev;
+
+					tmp->next = NULL;
+					tmp->prev = NULL;
+					free(tmp);
+				}
+
+				return 0;
+			}
+			tmp = tmp->next;
+		}
+	}
+	return -1;
+}

@@ -163,16 +163,35 @@ main()
 				continue;
 		}
 	}
-	printf("\n\tDoubly Linked Lists: \n");
+	printf("\n\t============================");
+	printf("\n\t==== DOUBLY LINKED LIST ====");
+	printf("\n\t============================\n");
 
 	struct d_Node* d_head = NULL;
 	struct d_Node* d_tail = NULL;
+
+	d_erase(&d_head, 2, &d_tail);
+
 	d_put(&d_head, 5, &d_tail);
 	d_put(&d_head, 3, &d_tail);
 	d_put(&d_head, 2, &d_tail);
 	d_put(&d_head, 9, &d_tail);
 	d_put(&d_head, 1, &d_tail);
 
+	printf("Before removal:");
+	d_print_list(d_head);
+
+	d_erase(&d_head, 2, &d_tail);
+	d_erase(&d_head, 5, &d_tail);
+	d_erase(&d_head, 1, &d_tail);
+
+	printf("After removal:");
+	d_print_list(d_head);
+
+	d_put(&d_head, 99, &d_tail);
+	d_push(&d_head, 11, &d_tail);
+
+	
 	d_print_list(d_head);
 
     return 0;
