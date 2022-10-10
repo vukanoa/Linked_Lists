@@ -1,3 +1,6 @@
+#ifndef DOUBLY_LINKED_LIST_H
+#define DOUBLY_LINKED_LIST_H
+
 #include <stdio.h>
 
 // 'd' for Doubly (Linked List)
@@ -17,3 +20,5 @@ int d_find	(struct d_Node*  head, int data);
 void d_print_list		(struct d_Node* head);
 void d_generate_list	(struct d_Node** head, struct d_Node** tail);
 void d_destroy_list		(struct d_Node** head);
+
+#endif // DOUBLY_LINKED_LIST_H

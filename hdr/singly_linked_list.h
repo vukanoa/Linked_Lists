@@ -1,3 +1,6 @@
+#ifndef SINGLY_LINKED_LIST_H
+#define SINGLY_LINKED_LIST_H
+
 #include <stdio.h>
 
 struct Node{
@@ -28,3 +31,5 @@ void swap();
 struct Node* sorted_merge	(struct Node* a, struct Node* b);
 struct Node* mid_node		(struct Node* head);
 struct Node* partition		(struct Node* front, struct Node* right);
+
+#endif // SINGLY_LINKED_LIST_H
