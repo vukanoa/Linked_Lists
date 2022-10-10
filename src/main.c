@@ -173,8 +173,12 @@ main()
 	d_push(&d_head, 8, &d_tail);
 	d_push(&d_head, 9, &d_tail);
 
+	d_print_list(d_head);
+
 	d_find(d_head, 7);
 	d_find(d_head, 11);
 
+	d_destroy_list(&d_head);
+	d_print_list(d_head);
     return 0;
 }

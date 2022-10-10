@@ -156,3 +156,35 @@ d_print_list(struct d_Node* head)
 	}
 	printf("\n\n");
 }
+
+
+void
+d_destroy_list(struct d_Node** head)
+{
+	if ((*head) == NULL)
+	{
+		printf("\n\tUnable to destroy a non-existant List.\n\n");
+		return;
+	}
+
+	struct d_Node* tmp = NULL;
+
+	int destroy;
+	printf("\n\tAre you SURE you want to destroy a Doubly Linked list? [Yes - 1, No - 0]\n: ");
+	scanf("%d", &destroy);
+
+	if (!destroy)
+	{
+		printf("\n\tOperation \"Destroy a List\" was canceled.\n\n");
+		return;
+	}
+
+	while ((*head))
+	{
+		tmp = (*head);
+		(*head) = (*head)->next;
+		free(tmp);
+	}
+
+	printf("\n\tA List has been destroyed!\n\n");
+}
