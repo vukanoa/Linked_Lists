@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <time.h>
 #include "doubly_linked_list.h"
 
 void
@@ -155,6 +156,56 @@ d_print_list(struct d_Node* head)
 		cur = cur->next;
 	}
 	printf("\n\n");
+}
+
+
+void
+d_generate_list(struct d_Node** head, struct d_Node** tail)
+{
+	int size;
+	struct d_Node* tmp = NULL;
+
+	if ((*head) != NULL)
+	{
+		printf("   !!!   WARNING: Another Doubly Linked List already exists. Destroy it to prevent memory leak!");
+		d_destroy_list(head);
+	}
+	srand(time(NULL));
+
+	for(;;)
+	{
+		printf("How many elements would you like to have?\n: ");
+		scanf("%d", &size);
+
+		if (size < 0)
+			printf("\n\tUnable to make a list of size\"%d\". Try again.\n\n: ", size);
+		else if (size == 0)
+		{
+			printf("\n\tOperation \"Generate random Doubly Linked List\" was canceleed.\n\n");
+			return;
+		}
+		else
+			break;
+	}
+
+	for (int i = 0; i < size; i++)
+	{
+		tmp = (struct d_Node*) malloc(sizeof(struct d_Node));
+		tmp->data = rand() % 100;
+		tmp->next = NULL;
+		tmp->prev = NULL;
+
+		if ((*head) == NULL)
+			(*head) = (*tail) = tmp;
+		else
+		{
+			tmp->next = (*head);
+			(*head)->prev = tmp;
+			(*head) = tmp;
+		}
+	}
+
+	printf("\n\tA Doubly Linked List has been successfully generated!\n\n");
 }
 
 

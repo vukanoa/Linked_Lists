@@ -165,20 +165,8 @@ main()
 	}
 	struct d_Node* d_head = NULL;
 	struct d_Node* d_tail = NULL;
-	d_find(d_head, 5);
 
-	d_push(&d_head, 5, &d_tail);
-	d_push(&d_head, 6, &d_tail);
-	d_push(&d_head, 7, &d_tail);
-	d_push(&d_head, 8, &d_tail);
-	d_push(&d_head, 9, &d_tail);
-
-	d_print_list(d_head);
-
-	d_find(d_head, 7);
-	d_find(d_head, 11);
-
-	d_destroy_list(&d_head);
+	d_generate_list(&d_head, &d_tail);
 	d_print_list(d_head);
     return 0;
 }
