@@ -163,6 +163,18 @@ main()
 				continue;
 		}
 	}
+	struct d_Node* d_head = NULL;
+	struct d_Node* d_tail = NULL;
+	d_find(d_head, 5);
+
+	d_push(&d_head, 5, &d_tail);
+	d_push(&d_head, 6, &d_tail);
+	d_push(&d_head, 7, &d_tail);
+	d_push(&d_head, 8, &d_tail);
+	d_push(&d_head, 9, &d_tail);
+
+	d_find(d_head, 7);
+	d_find(d_head, 11);
 
     return 0;
 }

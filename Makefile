@@ -2,8 +2,9 @@ CC		:= gcc
 CFLAGS	:= -O0 -g -Wall
 BUILD	:= build
 TARGET	:= program.elf
+HDRDIR	:= hdr
 SRCDIR	:= src
-HDRS	:= -Ihdr
+HDRS	:= -I$(HDRDIR)
 SRCS	:= $(wildcard $(SRCDIR)/*.c)
 OBJS	:= $(patsubst $(SRCDIR)/%.c,$(BUILD)/%.o,$(SRCS))
 DEPS	:= $(patsubst $(SRCDIR)/%.c,$(BUILD)/%.d,$(SRCS))
@@ -30,4 +31,6 @@ clean:
 	rm -rf \
 	$(TARGET) \
 	$(BUILD) \
+	$(SRCDIR)/.*.swp \
+	$(HDRDIR)/.*.swp \
 	my_core.*
