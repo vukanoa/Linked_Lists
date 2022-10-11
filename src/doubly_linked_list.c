@@ -256,3 +256,105 @@ d_destroy_list(struct d_Node** head)
 
 	printf("\n\tA List has been destroyed!\n\n");
 }
+
+
+void
+d_merge_sort_old(struct d_Node** head)
+{
+	// O(n * logn)
+	if ((*head) == NULL || (*head)->next == NULL)
+		return;
+
+	// Split
+	struct d_Node* mid = d_mid_node((*head));
+
+	struct d_Node* a = (*head);
+	struct d_Node* b = mid->next;
+
+	// Split at the mid
+	mid->next = NULL;
+
+	// Split left and right recursively
+	d_merge_sort_old(&a);
+	d_merge_sort_old(&b);
+
+	(*head) = d_sorted_merge(a, b);
+}
+
+
+struct d_Node*
+d_merge_sort_new(struct d_Node* head)
+{
+	if (head == NULL || head->next == NULL)
+		return head;
+
+	struct d_Node* mid = d_mid_node(head);
+	struct d_Node* mid_next = mid->next;
+
+	mid->next = NULL;
+
+	struct d_Node* a = d_merge_sort_new(head);
+	struct d_Node* b = d_merge_sort_new(mid_next);
+
+	return d_sorted_merge(a, b);
+}
+
+
+struct d_Node*
+d_sorted_merge(struct d_Node* a, struct d_Node* b)
+{
+	struct d_Node* ret_head = NULL;
+	struct d_Node* tail = NULL;
+
+	// Find head with lower data
+	if (a->data < b->data)
+	{
+		ret_head = tail = a;
+		a = a->next;
+	}
+	else
+	{
+		ret_head = tail = b;
+		b = b->next;
+	}
+
+	// Concatenate in ascending order
+	while (a != NULL && b != NULL)
+	{
+		if (a->data < b->data)
+		{
+			tail->next = a;
+			tail = tail->next;
+			a = a->next;
+		}
+		else
+		{
+			tail->next = b;
+			tail = tail->next;
+			b = b->next;
+		}
+	}
+
+	if (a == NULL)
+		tail->next = b;
+	else
+		tail->next = a;
+	
+	return ret_head;
+}
+
+
+struct d_Node*
+d_mid_node(struct d_Node* head)
+{
+	struct d_Node* slow = head;
+	struct d_Node* fast = head->next;
+
+	while (fast != NULL && fast->next != NULL)
+	{
+		slow = slow->next;
+		fast = fast->next->next;
+	}
+
+	return slow;
+}
