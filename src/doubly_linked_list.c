@@ -143,17 +143,34 @@ d_find(struct d_Node* head, int data)
 void
 d_print_list(struct d_Node* head)
 {
-	struct d_Node* cur = head;
 	printf("\n\t");
 
 	if (head == NULL)
 		printf("Empty");
 
-	while (cur)
+	while (head)
 	{
-		printf("%d ", cur->data);
+		printf("%d ", head->data);
 
-		cur = cur->next;
+		head = head->next;
+	}
+	printf("\n\n");
+}
+
+
+void
+d_print_reverse(struct d_Node* tail)
+{
+	printf("\n\t");
+
+	if (tail == NULL)
+		printf("Empty");
+
+	while (tail)
+	{
+		printf("%d ", tail->data);
+
+		tail = tail->prev;
 	}
 	printf("\n\n");
 }

@@ -168,5 +168,6 @@ main()
 
 	d_generate_list(&d_head, &d_tail);
 	d_print_list(d_head);
+	d_print_reverse(d_tail);
     return 0;
 }
