@@ -358,3 +358,50 @@ d_mid_node(struct d_Node* head)
 
 	return slow;
 }
+
+
+void
+d_quick_sort(struct d_Node* front, struct d_Node* right)
+{
+	// Base case
+	if (front == NULL || right == NULL)
+		return;
+
+	if (front == right || front->prev == right || right->next == front)
+		return;
+	
+	struct d_Node* pivot = d_partition(front, right);
+	d_quick_sort(front, pivot->prev);
+	d_quick_sort(pivot->next, right);
+}
+
+
+void
+d_swap(struct d_Node* low, struct d_Node* high)
+{
+	int tmp = low->data;
+	low->data = high->data;
+	high->data = tmp;
+}
+
+
+struct d_Node*
+d_partition(struct d_Node* front, struct d_Node* right)
+{
+	struct d_Node* left = front;
+
+	while (left != right)
+	{
+		if (left->data < right->data)
+		{
+			if (front != left)
+				d_swap(front, left);
+
+			front = front->next;
+		}
+		left = left->next;
+	}
+	d_swap(front, right);
+
+	return front;
+}
