@@ -27,9 +27,9 @@ void merge_sort		(struct Node** head);
 void quick_sort		(struct Node*  head, struct Node* tail);
 
 // Util functions
-void swap();
+void swap(struct Node *a, struct Node *b);
 struct Node* sorted_merge	(struct Node* a, struct Node* b);
 struct Node* mid_node		(struct Node* head);
-struct Node* partition		(struct Node* front, struct Node* right);
+struct Node* partition		(struct Node* left, struct Node* right);
 
 #endif // SINGLY_LINKED_LIST_H

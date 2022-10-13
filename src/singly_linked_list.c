@@ -428,42 +428,35 @@ mid_node(struct Node* head)
 void
 quick_sort(struct Node* head, struct Node* tail)
 {
-	if (head == tail)
+	if (head == NULL || tail == NULL || head == tail)
 		return;
-
-	if (head->next == tail)
-	{
-		if (tail->data < head->data)
-			swap(head, tail);
-
-		return;
-	}
 
 	struct Node* pivot = partition(head, tail);
-	quick_sort(head		  , pivot);
+	quick_sort(head, pivot);
 	quick_sort(pivot->next, tail);
 }
 
+// 2 8 7
 
 struct Node*
-partition(struct Node* front, struct Node* right)
+partition(struct Node* left, struct Node* right)
 {
-	struct Node* cur_front = front;
-	struct Node* left = front->next;
+	struct Node* front = NULL;
+	struct Node* first_node = left;
 
 	while(left != right)
 	{
 		if (left->data < right->data)
 		{
-			swap(cur_front, left);
-			cur_front = cur_front->next;
+			front = front ? front->next : first_node;
+
+			if (front != left)
+				swap(front, left);
 		}
 		left = left->next;
 	}
+	swap(front ? front->next : first_node, right);
 
-	if (right->data < cur_front->data)
-		swap(cur_front, right);
-
-	return cur_front;
+	return front ? front : first_node;
 }
 
