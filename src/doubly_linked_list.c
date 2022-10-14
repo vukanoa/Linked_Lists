@@ -73,44 +73,43 @@ d_erase(struct d_Node** head, int data, struct d_Node** tail)
 			printf("Element %d has been successfully removed from Doubly Linked List!", data);
 			return;
 		}
-		
+
 		printf("Element %d does NOT exist in the Doubly Linked List!", data);
 		return;
 	}
-	else
+
+	struct d_Node* tmp = (*head);
+	while (tmp)
 	{
-		struct d_Node* tmp = (*head);
-		while (tmp)
+		if (tmp->data == data)
 		{
-			if (tmp->data == data)
+			if (tmp == (*head))
 			{
-				if (tmp == (*head))
-				{
-					tmp->next->prev = NULL;
-					(*head) = tmp->next;
-					tmp->next = NULL;
-					free(tmp);
-				}
-				else
-				{
-					tmp->prev->next = tmp->next;
-
-					if (tmp == (*tail))
-						(*tail) = tmp->prev;
-					else
-						tmp->next->prev = tmp->prev;
-
-					tmp->next = NULL;
-					tmp->prev = NULL;
-					free(tmp);
-				}
-
-				printf("Element %d has been successfully removed from Doubly Linked List!", data);
-				return;
+				tmp->next->prev = NULL;
+				(*head) = tmp->next;
+				tmp->next = NULL;
+				free(tmp);
 			}
-			tmp = tmp->next;
+			else
+			{
+				tmp->prev->next = tmp->next;
+
+				if (tmp == (*tail))
+					(*tail) = tmp->prev;
+				else
+					tmp->next->prev = tmp->prev;
+
+				tmp->next = NULL;
+				tmp->prev = NULL;
+				free(tmp);
+			}
+
+			printf("Element %d has been successfully removed from Doubly Linked List!", data);
+			return;
 		}
+		tmp = tmp->next;
 	}
+
 	printf("Element %d does NOT exist in the Doubly Linked List!", data);
 	return;
 }
