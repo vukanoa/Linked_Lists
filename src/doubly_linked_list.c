@@ -405,3 +405,101 @@ d_partition(struct d_Node* front, struct d_Node* right)
 
 	return front;
 }
+
+
+void
+swap_pointers(struct d_Node** head, struct d_Node** left, struct d_Node** right, struct d_Node** tail)
+{
+	struct d_Node* tmp;
+	struct d_Node* tmp_left_prev  = (*left)->prev;
+	struct d_Node* tmp_left_next  = (*left)->next;
+	struct d_Node* tmp_right_prev = (*right)->prev;
+	struct d_Node* tmp_right_next = (*right)->next;
+
+	if ((*left)->prev == NULL && (*right)->next == NULL) // 1 2 3 4 5 (1 & 5)
+	{
+		(*left)->prev = tmp_right_prev;
+		tmp_right_prev->next = (*left);
+
+		(*left)->next = tmp_right_next;
+		(*tail) = (*left);
+
+		(*right)->prev = tmp_left_prev;
+		(*head) = (*right);
+
+		(*right)->next = tmp_left_next;
+		tmp_left_next->prev = (*right);
+
+		tmp = (*left);
+		(*left) = (*right);
+		(*right) = tmp;
+	}
+	else if ((*left)->prev == NULL && (*right)->next != NULL) // 1 2 3 4 5 (1 & 4)
+	{
+		(*left)->prev = tmp_right_prev;
+		tmp_right_prev->next = (*left);
+
+		(*left)->next = tmp_right_next;
+		tmp_right_next->prev = (*left);
+
+		(*right)->prev = tmp_left_prev;
+		(*head) = (*right);
+
+		(*right)->next = tmp_left_next;
+		tmp_left_next->prev = (*right);
+
+		tmp = (*left);
+		(*left) = (*right);
+		(*right) = tmp;
+	}
+	else if ((*left)->prev != NULL && (*right)->next == NULL) // 1 2 3 4 5 (2 & 5)
+	{
+		(*left)->prev = tmp_right_prev;
+		tmp_right_prev->next = (*left);
+
+		(*left)->next = tmp_right_next;
+		(*tail) = (*left);
+
+		(*right)->prev = tmp_left_prev;
+		tmp_left_prev->next = (*right);
+
+		(*right)->next = tmp_left_next;
+		tmp_left_next->prev = (*right);
+
+		tmp = (*left);
+		(*left) = (*right);
+		(*right) = tmp;
+	}
+	else // 1 2 3 4 5 (2 & 4), (2 & 3) etc.
+	{
+		if ((*left)->next == (*right)) // 1 2 3 4 5 (2 & 3)
+		{
+			(*left)->prev = (*right);
+			(*right)->next = (*left);
+
+			(*left)->next = tmp_right_next;
+			tmp_right_next->prev = (*left);
+
+			(*right)->prev = tmp_left_prev;
+			tmp_left_prev->next = (*right);
+		}
+		else // 1 2 3 4 5 (2 & 4)
+		{
+			(*left)->prev = tmp_right_prev;
+			tmp_right_prev->next = (*left);
+
+			(*left)->next = tmp_right_next;
+			tmp_right_next->prev = (*left);
+
+			(*right)->prev = tmp_left_prev;
+			tmp_left_prev->next = (*right);
+
+			(*right)->next = tmp_left_next;
+			tmp_left_next->prev = (*right);
+		}
+
+		tmp = (*left);
+		(*left) = (*right);
+		(*right) = tmp;
+	}
+}
