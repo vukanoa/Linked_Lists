@@ -168,7 +168,7 @@ main()
 	struct d_Node* d_tail = NULL;
 
 	d_put(&d_head, 1, &d_tail);
-	d_put(&d_head, 2, &d_tail);
+	d_put(&d_head, 2, &d_tail); // Comment this and two lines down for TEST 8
 	d_put(&d_head, 3, &d_tail);
 	d_put(&d_head, 4, &d_tail);
 	d_put(&d_head, 5, &d_tail);
@@ -221,6 +221,30 @@ main()
 	// printf("Five:\t%d\n", five->data);
 	// printf("Tail:\t%d\n", d_tail->data);
 
+	// TEST 6 -> Swap (4 & 5)
+	// struct d_Node* four  = d_tail->prev;
+	// struct d_Node* five  = d_tail;
+	// printf("Head:\t%d\n",  d_head->data);
+	// printf("Four:\t%d\n",  four->data);
+	// printf("Five:\t%d\n",  five->data);
+	// printf("Tail:\t%d\n",  d_tail->data);
+
+	// TEST 7 -> Swap (1 & 2)
+	// struct d_Node* one =  d_head;
+	// struct d_Node* two =  d_head->next;
+	// printf("Head:\t%d\n", d_head->data);
+	// printf("One:\t%d\n",  one->data);
+	// printf("Two:\t%d\n",  two->data);
+	// printf("Tail:\t%d\n", d_tail->data);
+
+	// TEST 8 -> Swap (1 & 5) When 1 & 5 are the only nodes
+	// struct d_Node* one =   d_head;
+	// struct d_Node* five =  d_head->next;
+	// printf("Head:\t%d\n",  d_head->data);
+	// printf("One:\t%d\n",   one->data);
+	// printf("Five:\t%d\n",  five->data);
+	// printf("Tail:\t%d\n",  d_tail->data);
+
 
 
 	// List: 1 2 3 4 5
@@ -239,6 +263,14 @@ main()
 	// TEST 5 -> Swap (1 & 5)
 	// swap_pointers(&d_head, &one, &five, &d_tail);
 
+	// TEST 6 -> Swap (4 & 5)
+	// swap_pointers(&d_head, &four, &five, &d_tail);
+
+	// TEST 7 -> Swap (1 & 2)
+	// swap_pointers(&d_head, &one, &two, &d_tail);
+
+	// TEST 8 -> Swap (1 & 5) When 1 & 5 are the only nodes
+	// swap_pointers(&d_head, &one, &five, &d_tail);
 
 
 	// Print After
@@ -274,6 +306,24 @@ main()
 	// printf("One:\t%d\n",  one->data);
 	// printf("Five:\t%d\n", five->data);
 	// printf("Tail:\t%d\n", d_tail->data);
+
+	// TEST 6 -> Swap (4 & 5)
+	// printf("Head:\t%d\n",  d_head->data);
+	// printf("Four:\t%d\n",  four->data);
+	// printf("Five:\t%d\n",  five->data);
+	// printf("Tail:\t%d\n",  d_tail->data);
+
+	// TEST 7 -> Swap (1 & 2)
+	// printf("Head:\t%d\n", d_head->data);
+	// printf("One:\t%d\n",  one->data);
+	// printf("Two:\t%d\n",  two->data);
+	// printf("Tail:\t%d\n", d_tail->data);
+
+	// TEST 8 -> Swap (1 & 5) When 1 & 5 are the only nodes
+	// printf("Head:\t%d\n",  d_head->data);
+	// printf("One:\t%d\n",   one->data);
+	// printf("Five:\t%d\n",  five->data);
+	// printf("Tail:\t%d\n",  d_tail->data);
 
     return 0;
 }
