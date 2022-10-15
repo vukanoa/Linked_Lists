@@ -375,6 +375,24 @@ d_quick_sort(struct d_Node* front, struct d_Node* right)
 }
 
 
+void // 3 2 5 1 4
+d_quick_sort_new(struct d_Node** head, struct d_Node** front, struct d_Node** right, struct d_Node** tail)
+{
+	// Base case
+	if ((*head) == NULL || (*front) == NULL || (*right) == NULL || (*tail == NULL))
+		return;
+	
+	if ((*front) == (*right) || (*front)->prev == (*right) || (*right)->next == (*front))
+		return;
+
+	struct d_Node* pivot = d_partition_new(head, front, right, tail);
+	(*front) = (*head);
+
+	d_quick_sort_new(head, front, &pivot->prev, tail);
+	d_quick_sort_new(head, &pivot->next, right, tail);
+}
+
+
 void
 d_swap(struct d_Node* low, struct d_Node* high)
 {
@@ -403,6 +421,30 @@ d_partition(struct d_Node* front, struct d_Node* right)
 	d_swap(front, right);
 
 	return front;
+}
+
+
+// 3 2 5 1 4
+// 3 2 1 4 5
+struct d_Node*
+d_partition_new(struct d_Node** head, struct d_Node** front, struct d_Node** right, struct d_Node** tail)
+{
+	struct d_Node* left = (*front);
+
+	while (left != (*right))
+	{
+		if (left->data < (*right)->data)
+		{
+			if ((*front) != left)
+				swap_pointers(head, front, &left, tail);
+
+			(*front) = (*front)->next;
+		}
+		left = left->next;
+	}
+	swap_pointers(head, front, right, tail);
+
+	return (*front);
 }
 
 
@@ -456,17 +498,27 @@ swap_pointers(struct d_Node** head, struct d_Node** left, struct d_Node** right,
 	{
 		if ((*left)->next != (*right))  // 1 2 3 4 5 (1 & 4)
 		{
+			// Example is 3 2 1 4 5
+			// The problem is when I'm sending (3, 2, 1, 5) in this function
+			// Second d_partition_new call
+			// It tries to swap 3 with 1
+
 			(*left)->prev = tmp_right_prev;
 			tmp_right_prev->next = (*left);
 
 			(*left)->next = tmp_right_next;
-			tmp_right_next->prev = (*left);
+			//tmp_right_next->prev = (*left); WHAT THE HELL?!?!?!
+			// **right which is 1 suddenly becomes 3
 
 			(*right)->prev = tmp_left_prev;
 			(*head) = (*right);
 
 			(*right)->next = tmp_left_next;
 			tmp_left_next->prev = (*right);
+
+			// However, if I put that line down here, it suddenly works
+			// WHAT. THE. HELL.
+			tmp_right_next->prev = (*left);
 
 			tmp = (*left);
 			(*left) = (*right);

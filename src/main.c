@@ -167,163 +167,28 @@ main()
 	struct d_Node* d_head = NULL;
 	struct d_Node* d_tail = NULL;
 
-	d_put(&d_head, 1, &d_tail);
-	d_put(&d_head, 2, &d_tail); // Comment this and two lines down for TEST 8
+	// d_put(&d_head, 3, &d_tail);
+	// d_put(&d_head, 2, &d_tail);
+	// d_put(&d_head, 1, &d_tail);
+	// d_put(&d_head, 4, &d_tail);
+	// d_put(&d_head, 5, &d_tail);
+
 	d_put(&d_head, 3, &d_tail);
-	d_put(&d_head, 4, &d_tail);
+	d_put(&d_head, 2, &d_tail);
 	d_put(&d_head, 5, &d_tail);
+	d_put(&d_head, 1, &d_tail);
+	d_put(&d_head, 4, &d_tail);
+
+	struct d_Node* front = d_head;
+	struct d_Node* right = d_tail;
 
 	// -----------------------
 	// ------- TESTING -------
 	// -----------------------
 
-	// Print Before
-	printf("\n\n------- BEFORE -------\n");
 	d_print_list(d_head);
-
-	// TEST 1 -> Swap (2 & 3)
-	// struct d_Node* two   = d_head->next;
-	// struct d_Node* three = two->next;
-	// printf("Head:\t%d\n",  d_head->data);
-	// printf("Two:\t%d\n",   two->data);
-	// printf("Three:\t%d\n", three->data);
-	// printf("Tail:\t%d\n",  d_tail->data);
-
-	// TEST 2 -> Swap (2 & 4)
-	// struct d_Node* two  = d_head->next;
-	// struct d_Node* four = d_tail->prev;
-	// printf("Head:\t%d\n", d_head->data);
-	// printf("Two:\t%d\n",  two->data);
-	// printf("Four:\t%d\n", four->data);
-	// printf("Tail:\t%d\n", d_tail->data);
-
-	// TEST 3 -> Swap (1 & 4)
-	// struct d_Node* one  = d_head;
-	// struct d_Node* four = d_tail->prev;
-	// printf("Head:\t%d\n", d_head->data);
-	// printf("One:\t%d\n",  one->data);
-	// printf("Four:\t%d\n", four->data);
-	// printf("Tail:\t%d\n", d_tail->data);
-
-	// TEST 4 -> Swap (2 & 5)
-	// struct d_Node* two  = d_head->next;
-	// struct d_Node* five = d_tail;
-	// printf("Head:\t%d\n", d_head->data);
-	// printf("Two:\t%d\n",  two->data);
-	// printf("Five:\t%d\n", five->data);
-	// printf("Tail:\t%d\n", d_tail->data);
-
-	// TEST 5 -> Swap (1 & 5)
-	// struct d_Node* one  = d_head;
-	// struct d_Node* five = d_tail;
-	// printf("Head:\t%d\n", d_head->data);
-	// printf("One:\t%d\n",  one->data);
-	// printf("Five:\t%d\n", five->data);
-	// printf("Tail:\t%d\n", d_tail->data);
-
-	// TEST 6 -> Swap (4 & 5)
-	// struct d_Node* four  = d_tail->prev;
-	// struct d_Node* five  = d_tail;
-	// printf("Head:\t%d\n",  d_head->data);
-	// printf("Four:\t%d\n",  four->data);
-	// printf("Five:\t%d\n",  five->data);
-	// printf("Tail:\t%d\n",  d_tail->data);
-
-	// TEST 7 -> Swap (1 & 2)
-	// struct d_Node* one =  d_head;
-	// struct d_Node* two =  d_head->next;
-	// printf("Head:\t%d\n", d_head->data);
-	// printf("One:\t%d\n",  one->data);
-	// printf("Two:\t%d\n",  two->data);
-	// printf("Tail:\t%d\n", d_tail->data);
-
-	// TEST 8 -> Swap (1 & 5) When 1 & 5 are the only nodes
-	// struct d_Node* one =   d_head;
-	// struct d_Node* five =  d_head->next;
-	// printf("Head:\t%d\n",  d_head->data);
-	// printf("One:\t%d\n",   one->data);
-	// printf("Five:\t%d\n",  five->data);
-	// printf("Tail:\t%d\n",  d_tail->data);
-
-
-
-	// List: 1 2 3 4 5
-	// Test 1 -> Swap (2 & 3)
-	// swap_pointers(&d_head, &two, &three, &d_tail);
-
-	// TEST 2 -> Swap (2 & 4)
-	// swap_pointers(&d_head, &two, &four, &d_tail);
-
-	// TEST 3 -> Swap (1 & 4)
-	// swap_pointers(&d_head, &one, &four, &d_tail);
-
-	// TEST 4 -> Swap (2 & 5)
-	// swap_pointers(&d_head, &two, &five, &d_tail);
-
-	// TEST 5 -> Swap (1 & 5)
-	// swap_pointers(&d_head, &one, &five, &d_tail);
-
-	// TEST 6 -> Swap (4 & 5)
-	// swap_pointers(&d_head, &four, &five, &d_tail);
-
-	// TEST 7 -> Swap (1 & 2)
-	// swap_pointers(&d_head, &one, &two, &d_tail);
-
-	// TEST 8 -> Swap (1 & 5) When 1 & 5 are the only nodes
-	// swap_pointers(&d_head, &one, &five, &d_tail);
-
-
-	// Print After
-	printf("\n\n\n\n------- AFTER -------\n");
+	d_quick_sort_new(&d_head, &front, &right, &d_tail);
 	d_print_list(d_head);
-
-	// TEST 1 -> Swap (2 & 3)
-	// printf("Head:\t%d\n",  d_head->data);
-	// printf("Two:\t%d\n",   two->data);
-	// printf("Three:\t%d\n", three->data);
-	// printf("Tail:\t%d\n",  d_tail->data);
-
-	// TEST 2 -> Swap (2 & 4)
-	// printf("Head:\t%d\n", d_head->data);
-	// printf("Two:\t%d\n",  two->data);
-	// printf("Four:\t%d\n", four->data);
-	// printf("Tail:\t%d\n", d_tail->data);
-
-	// TEST 3 -> Swap (1 & 4)
-	// printf("Head:\t%d\n", d_head->data);
-	// printf("One:\t%d\n",  one->data);
-	// printf("Four:\t%d\n", four->data);
-	// printf("Tail:\t%d\n", d_tail->data);
-
-	// TEST 4 -> Swap (2 & 5)
-	// printf("Head:\t%d\n", d_head->data);
-	// printf("Two:\t%d\n",  two->data);
-	// printf("Five:\t%d\n", five->data);
-	// printf("Tail:\t%d\n", d_tail->data);
-
-	// TEST 5 -> Swap (1 & 5)
-	// printf("Head:\t%d\n", d_head->data);
-	// printf("One:\t%d\n",  one->data);
-	// printf("Five:\t%d\n", five->data);
-	// printf("Tail:\t%d\n", d_tail->data);
-
-	// TEST 6 -> Swap (4 & 5)
-	// printf("Head:\t%d\n",  d_head->data);
-	// printf("Four:\t%d\n",  four->data);
-	// printf("Five:\t%d\n",  five->data);
-	// printf("Tail:\t%d\n",  d_tail->data);
-
-	// TEST 7 -> Swap (1 & 2)
-	// printf("Head:\t%d\n", d_head->data);
-	// printf("One:\t%d\n",  one->data);
-	// printf("Two:\t%d\n",  two->data);
-	// printf("Tail:\t%d\n", d_tail->data);
-
-	// TEST 8 -> Swap (1 & 5) When 1 & 5 are the only nodes
-	// printf("Head:\t%d\n",  d_head->data);
-	// printf("One:\t%d\n",   one->data);
-	// printf("Five:\t%d\n",  five->data);
-	// printf("Tail:\t%d\n",  d_tail->data);
 
     return 0;
 }
