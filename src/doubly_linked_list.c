@@ -386,7 +386,7 @@ d_quick_sort_new(struct d_Node** head, struct d_Node** front, struct d_Node** ri
 		return;
 
 	struct d_Node* pivot = d_partition_new(head, front, right, tail);
-	(*front) = (*head);
+	(*front) = (*head); //WHY THE HELL IT CHANGES THE NEXT POINTER OF HEAD??? 1->3->9
 
 	d_quick_sort_new(head, front, &pivot->prev, tail);
 	d_quick_sort_new(head, &pivot->next, right, tail);
@@ -426,6 +426,7 @@ d_partition(struct d_Node* front, struct d_Node* right)
 
 // 3 2 5 1 4
 // 3 2 1 4 5
+// 1 9 3
 struct d_Node*
 d_partition_new(struct d_Node** head, struct d_Node** front, struct d_Node** right, struct d_Node** tail)
 {
@@ -448,9 +449,13 @@ d_partition_new(struct d_Node** head, struct d_Node** front, struct d_Node** rig
 }
 
 
+// 1 9 3
 void
 swap_pointers(struct d_Node** head, struct d_Node** left, struct d_Node** right, struct d_Node** tail)
 {
+	if ((*left) == (*right))
+		return;
+
 	struct d_Node* tmp;
 	struct d_Node* tmp_left_prev  = (*left)->prev;
 	struct d_Node* tmp_left_next  = (*left)->next;
@@ -563,6 +568,11 @@ swap_pointers(struct d_Node** head, struct d_Node** left, struct d_Node** right,
 		}
 		else // 1 2 3 4 5 (4 & 5)
 		{
+			// 1 = 0x555..55b6f0 
+			// 9 = 0x555..55b6d0 
+			// 3 = 0x555..55b2a0 
+
+			// 1 9 3
 			(*left)->prev = (*right);
 			(*right)->next = (*left);
 
@@ -570,11 +580,14 @@ swap_pointers(struct d_Node** head, struct d_Node** left, struct d_Node** right,
 			(*tail) = (*left);
 
 			(*right)->prev = tmp_left_prev;
-			tmp_left_prev->next = (*right);
+			tmp_left_prev->next = (*right); // WHAT THE HELL 2?!?!
 
+			// printf("Head: %d, Left: %d, Right: %d, Tail: %d\n", (*head)->data, (*left)->data, (*right)->data, (*tail)->data);
 			tmp = (*left);
 			(*left) = (*right);
 			(*right) = tmp;
+
+			// printf("Head: %d, Left: %d, Right: %d, Tail: %d\n", (*head)->data, (*left)->data, (*right)->data, (*tail)->data);
 		}
 
 	}

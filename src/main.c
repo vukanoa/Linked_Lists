@@ -167,17 +167,15 @@ main()
 	struct d_Node* d_head = NULL;
 	struct d_Node* d_tail = NULL;
 
+	d_put(&d_head, 3, &d_tail);
+	d_put(&d_head, 9, &d_tail);
+	d_put(&d_head, 1, &d_tail);
+
 	// d_put(&d_head, 3, &d_tail);
 	// d_put(&d_head, 2, &d_tail);
+	// d_put(&d_head, 5, &d_tail);
 	// d_put(&d_head, 1, &d_tail);
 	// d_put(&d_head, 4, &d_tail);
-	// d_put(&d_head, 5, &d_tail);
-
-	d_put(&d_head, 3, &d_tail);
-	d_put(&d_head, 2, &d_tail);
-	d_put(&d_head, 5, &d_tail);
-	d_put(&d_head, 1, &d_tail);
-	d_put(&d_head, 4, &d_tail);
 
 	struct d_Node* front = d_head;
 	struct d_Node* right = d_tail;

@@ -1,0 +1,33 @@
+b doubly_linked_list.c:392
+run
+s
+n
+n
+s
+n
+define jao
+display **head
+display **front
+display **right
+display **tail
+display *left
+end
+b doubly_linked_list.c:446
+c
+s
+n
+n
+n
+n
+define nes
+display **head
+display **left
+display **right
+display **tail
+display (tmp_left_prev) ? *tmp_left_prev : "NULL"
+display (tmp_left_next) ? *tmp_left_next : "NULL"
+display (tmp_right_prev) ? *tmp_right_prev : "NULL"
+display (tmp_right_next) ? *tmp_right_next : "NULL"
+end
+
+
