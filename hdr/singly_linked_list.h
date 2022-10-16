@@ -32,4 +32,7 @@ struct Node* sorted_merge	(struct Node* a, struct Node* b);
 struct Node* mid_node		(struct Node* head);
 struct Node* partition		(struct Node* left, struct Node* right);
 
+// List Problems
+struct Node* kth_to_last(struct Node* head, int k);
+
 #endif // SINGLY_LINKED_LIST_H

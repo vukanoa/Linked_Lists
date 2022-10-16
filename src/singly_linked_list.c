@@ -460,3 +460,42 @@ partition(struct Node* left, struct Node* right)
 	return front ? front : first_node;
 }
 
+
+struct Node*
+kth_to_last(struct Node* head, int k)
+{
+	if (head == NULL || k < 0)
+		return NULL;
+
+	if (k == 0)
+	{
+		if (head->next == NULL)
+			return head;
+
+		while (head->next != NULL)
+			head = head->next;
+
+		return head;
+	}
+
+	struct Node* cur  = head;
+	struct Node* iter = head;
+
+	while (k-- > 0)
+	{
+		if (iter == NULL)
+			return NULL;
+
+		iter=iter->next;
+	}
+
+	if (iter == NULL)
+		return NULL;
+
+	while (iter->next != NULL)
+	{
+		cur  = cur->next;
+		iter = iter->next;
+	}
+	return cur;
+}
