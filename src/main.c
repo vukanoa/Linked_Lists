@@ -164,39 +164,43 @@ main()
 	//	}
 	//}
 
-	
 	struct Node* head = NULL;
-	struct Node* tail = NULL;
-
-	put(&head, 1, &tail);
-	put(&head, 2, &tail);
-	put(&head, 3, &tail);
-	put(&head, 4, &tail);
-	put(&head, 5, &tail);
-
-	print_list(head);
+	struct Node* tail = NULL; // Comment for TEST 1 to prevent Warnings
 
 	// -----------------------
 	// ------- TESTING -------
 	// -----------------------
 
-	int k = 3;
-	struct Node *kth = kth_to_last(head, k);
-	if (k == 1 || k == -1)
-		printf("\tSOLUTION:\n\t\t%dst to last is %d\n\n\n", k, kth ? kth->data : -1);
-	else if (k == 2 || k== -2)
-		printf("\tSOLUTION:\n\t\t%dnd to last is %d\n\n\n", k, kth ? kth->data : -1);
-	else if (k == 3 || k== -3)
-		printf("\tSOLUTION:\n\t\t%drd to last is %d\n\n\n", k, kth ? kth->data : -1);
-	else
-		printf("\tSOLUTION:\n\t\t%dth to last is %d\n\n\n", k, kth ? kth->data : -1);
+	// TEST 1
+	// Empty List
 
+	// TEST 2
+	// put(&head, 11, &tail);
+	// put(&head, 51, &tail);
 
-	printf("\t--------------------------------\n");
-	printf("\t[Very last is 0 to last]\n");
-	printf("\t[-1 Means the Node doesn't exist!]\n");
-	printf("\t--------------------------------\n\n");
-	
+	// TEST 3
+	// put(&head, 11, &tail);
+	// put(&head, 12, &tail);
+	// put(&head, 51, &tail);
+	// put(&head, 52, &tail);
+
+	// TEST 4
+	put(&head, 11, &tail);
+	put(&head, 12, &tail);
+	put(&head, 13, &tail);
+	put(&head, 14, &tail);
+	put(&head, 51, &tail);
+	put(&head, 52, &tail);
+	put(&head, 53, &tail);
+	put(&head, 54, &tail);
+
+	printf("Before:");
+	print_list(head);
+
+	the_runner_technique(head);
+
+	printf("After:");
+	print_list(head);
 
     return 0;
 }

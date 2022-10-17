@@ -499,3 +499,35 @@ kth_to_last(struct Node* head, int k)
 	}
 	return cur;
 }
+
+
+void
+the_runner_technique(struct Node* head)
+{
+	if (head == NULL)
+		return;
+	
+	if (head->next->next == NULL) // We're told there are even number of nodes
+		return; //Already alternating
+
+	struct Node* slow = head;
+	struct Node* fast = head->next;
+	struct Node* tmp  = NULL;
+
+	while (fast != NULL && fast->next != NULL)
+	{
+		slow = slow->next;
+		fast = fast->next->next;
+	}
+
+	fast = head;
+	while (slow->next->next != NULL)
+	{
+		tmp = fast->next;
+		fast->next = slow->next;
+		slow->next = slow->next->next;
+		
+		fast->next->next = tmp;
+		fast = fast->next->next;
+	}
+}
