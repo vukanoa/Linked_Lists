@@ -168,7 +168,93 @@ main_menu()
 int
 main()
 {
-	main_menu();
+	// -----------------------
+	// ------- TESTING -------
+	// -----------------------
+
+	struct Node* head = NULL;
+	struct Node* tail = NULL; // Comment for TEST 0 to prevent Warning
+
+	// TEST 0
+	// Empty List
+
+	// TEST 1
+	//put(&head, 2, &tail);
+	//put(&head, 2, &tail);
+	//put(&head, 2, &tail);
+	//put(&head, 2, &tail);
+	//put(&head, 2, &tail);
+	//put(&head, 5, &tail);
+	//put(&head, 2, &tail);
+	//put(&head, 3, &tail);
+	//put(&head, 4, &tail);
+	//put(&head, 7, &tail);
+	//put(&head, 4, &tail);
+	//put(&head, 4, &tail);
+	//put(&head, 8, &tail);
+	
+	// TEST 2
+	// put(&head, 2, &tail);
+	// put(&head, 5, &tail);
+	// put(&head, 2, &tail);
+	// put(&head, 3, &tail);
+	// put(&head, 4, &tail);
+	// put(&head, 7, &tail);
+	// put(&head, 4, &tail);
+	// put(&head, 4, &tail);
+	// put(&head, 8, &tail);
+	// put(&head, 8, &tail);
+	// put(&head, 8, &tail);
+	// put(&head, 8, &tail);
+
+	// TEST 3
+	// put(&head, 3, &tail);
+	// put(&head, 6, &tail);
+	// put(&head, 2, &tail);
+	// put(&head, 3, &tail);
+	// put(&head, 4, &tail);
+	// put(&head, 7, &tail);
+	// put(&head, 3, &tail);
+	// put(&head, 4, &tail);
+	// put(&head, 8, &tail);
+	// put(&head, 11, &tail);
+	// put(&head, 11, &tail);
+	// put(&head, 8, &tail);
+	// put(&head, 7, &tail);
+	// put(&head, 13, &tail);
+	
+	// TEST 4
+	put(&head, 1, &tail);
+	put(&head, 3, &tail);
+	put(&head, 6, &tail);
+	put(&head, 2, &tail);
+	put(&head, 3, &tail);
+	put(&head, 4, &tail);
+	put(&head, 7, &tail);
+	put(&head, 3, &tail);
+	put(&head, 4, &tail);
+	put(&head, 8, &tail);
+	put(&head, 11, &tail);
+	put(&head, 11, &tail);
+	put(&head, 8, &tail);
+	put(&head, 3, &tail);
+	put(&head, 3, &tail);
+	put(&head, 7, &tail);
+	put(&head, 13, &tail);
+
+	printf("\n\n");
+	printf("\t=========================\n");
+	printf("\t=== REMOVE DUPLICATES ===\n");
+	printf("\t=========================\n");
+	printf("\n\n");
+
+	printf("Before:");
+	print_list(head);
+
+	remove_duplicates(head);
+
+	printf("After:");
+	print_list(head);
 
     return 0;
 }

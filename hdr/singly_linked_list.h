@@ -33,7 +33,8 @@ struct Node* mid_node		(struct Node* head);
 struct Node* partition		(struct Node* left, struct Node* right);
 
 // List Problems
-struct Node* kth_to_last (struct Node* head, int k);
-void the_runner_technique(struct Node* head);
+struct Node* kth_to_last			(struct Node* head, int k);
+void		 the_runner_technique	(struct Node* head);
+void		 remove_duplicates		(struct Node* head);
 
 #endif // SINGLY_LINKED_LIST_H

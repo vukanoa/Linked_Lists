@@ -531,3 +531,33 @@ the_runner_technique(struct Node* head)
 		fast = fast->next->next;
 	}
 }
+
+
+void
+remove_duplicates(struct Node* head)
+{
+	// Base case
+	if (head == NULL || head->next == NULL)
+		return;
+	
+	struct Node* dup = head;
+	struct Node* tmp = NULL; // For freeing to prevent Memory Leak
+
+	while(head)
+	{
+		while (dup->next)
+		{
+			if (dup->next->data == head->data)
+			{
+				tmp = dup->next;
+				dup->next = dup->next->next;
+
+				free(tmp);
+			}
+			else
+				dup = dup->next;
+		}
+		head = head->next;
+		dup = head;
+	}
+}
