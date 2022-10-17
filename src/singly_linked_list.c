@@ -154,8 +154,7 @@ print_list(struct Node* head)
 
         cur = cur->next;
     }
-    // printf("\n\n");
-    printf("\n");
+    printf("\n\n");
 }
 
 
@@ -576,4 +575,35 @@ delete_middle_node(struct Node* mid)
 	mid->data = next->data;
 	mid->next = next->next;
 	free(next);
+}
+
+
+struct Node*
+separate_around_value(struct Node* head, int x)
+{
+	if (head == NULL)
+		return NULL;
+
+	struct Node* front = head;
+	struct Node* rear  = head;
+
+	while (head != NULL)
+	{
+		struct Node* next  = head->next;
+
+		if (head->data < x)
+		{
+			head->next = front;
+			front = head;
+		}
+		else
+		{
+			rear->next = head;
+			rear = head;
+		}
+		head = next;
+	}
+	rear->next = NULL; // In case last element is < x
+
+	return front;
 }
