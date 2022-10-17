@@ -36,5 +36,6 @@ struct Node* partition		(struct Node* left, struct Node* right);
 struct Node* kth_to_last			(struct Node* head, int k);
 void		 the_runner_technique	(struct Node* head);
 void		 remove_duplicates		(struct Node* head);
+void		 delete_middle_node		(struct Node* mid);
 
 #endif // SINGLY_LINKED_LIST_H

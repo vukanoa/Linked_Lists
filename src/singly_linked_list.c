@@ -154,7 +154,8 @@ print_list(struct Node* head)
 
         cur = cur->next;
     }
-    printf("\n\n");
+    // printf("\n\n");
+    printf("\n");
 }
 
 
@@ -560,4 +561,19 @@ remove_duplicates(struct Node* head)
 		head = head->next;
 		dup = head;
 	}
+}
+
+
+void
+delete_middle_node(struct Node* mid)
+{
+	// Base case & One case where it's impossible to achieve this
+	if (mid == NULL || mid->next == NULL)
+		return;
+	
+	struct Node* next = mid->next;
+
+	mid->data = next->data;
+	mid->next = next->next;
+	free(next);
 }

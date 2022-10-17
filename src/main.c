@@ -175,86 +175,65 @@ main()
 	struct Node* head = NULL;
 	struct Node* tail = NULL; // Comment for TEST 0 to prevent Warning
 
+	// TEST IMPOSSIBLE
+	// put(&head, 1, &tail);
+	// put(&head, 2, &tail);
+
 	// TEST 0
 	// Empty List
 
 	// TEST 1
-	//put(&head, 2, &tail);
-	//put(&head, 2, &tail);
-	//put(&head, 2, &tail);
-	//put(&head, 2, &tail);
-	//put(&head, 2, &tail);
-	//put(&head, 5, &tail);
-	//put(&head, 2, &tail);
-	//put(&head, 3, &tail);
-	//put(&head, 4, &tail);
-	//put(&head, 7, &tail);
-	//put(&head, 4, &tail);
-	//put(&head, 4, &tail);
-	//put(&head, 8, &tail);
-	
-	// TEST 2
+	// put(&head, 1, &tail);
 	// put(&head, 2, &tail);
+	// put(&head, 3, &tail);
+	// put(&head, 4, &tail);
 	// put(&head, 5, &tail);
-	// put(&head, 2, &tail);
-	// put(&head, 3, &tail);
-	// put(&head, 4, &tail);
-	// put(&head, 7, &tail);
-	// put(&head, 4, &tail);
-	// put(&head, 4, &tail);
-	// put(&head, 8, &tail);
-	// put(&head, 8, &tail);
-	// put(&head, 8, &tail);
-	// put(&head, 8, &tail);
 
-	// TEST 3
-	// put(&head, 3, &tail);
-	// put(&head, 6, &tail);
-	// put(&head, 2, &tail);
-	// put(&head, 3, &tail);
-	// put(&head, 4, &tail);
-	// put(&head, 7, &tail);
-	// put(&head, 3, &tail);
-	// put(&head, 4, &tail);
-	// put(&head, 8, &tail);
-	// put(&head, 11, &tail);
-	// put(&head, 11, &tail);
-	// put(&head, 8, &tail);
-	// put(&head, 7, &tail);
-	// put(&head, 13, &tail);
-	
-	// TEST 4
+	// TEST 2
 	put(&head, 1, &tail);
-	put(&head, 3, &tail);
-	put(&head, 6, &tail);
 	put(&head, 2, &tail);
 	put(&head, 3, &tail);
 	put(&head, 4, &tail);
-	put(&head, 7, &tail);
-	put(&head, 3, &tail);
-	put(&head, 4, &tail);
-	put(&head, 8, &tail);
-	put(&head, 11, &tail);
-	put(&head, 11, &tail);
-	put(&head, 8, &tail);
-	put(&head, 3, &tail);
-	put(&head, 3, &tail);
-	put(&head, 7, &tail);
-	put(&head, 13, &tail);
+	put(&head, 5, &tail);
+	put(&head, 6, &tail);
+
+	struct Node* mid  = head;
+	struct Node* fast = head;
+
+	// Find mid node (if even number of elements, find 'right one')
+	while (fast != NULL && fast->next != NULL)
+	{
+		mid = mid->next;
+		fast = fast->next->next;
+	}
 
 	printf("\n\n");
-	printf("\t=========================\n");
-	printf("\t=== REMOVE DUPLICATES ===\n");
-	printf("\t=========================\n");
+	printf("\t==========================\n");
+	printf("\t=== REMOVE MIDDLE NODE ===\n");
+	printf("\t==========================\n");
 	printf("\n\n");
 
 	printf("Before:");
 	print_list(head);
 
-	remove_duplicates(head);
+	// TEST IMPOSSIBLE
+	// printf("          ^\n");
+	// printf("    Mid __|\n\n");
+
+	// TEST 1
+	// printf("            ^\n");
+	// printf("    Mid ____|\n\n");
+
+	// TEST 2
+	printf("              ^\n");
+	printf("    Mid ______|\n\n");
+
+    printf("\n"); // So that TEST 0 also looks neat
+	delete_middle_node(mid);
 
 	printf("After:");
 	print_list(head);
+    printf("\n");
 
     return 0;
 }
