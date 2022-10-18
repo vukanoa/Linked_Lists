@@ -649,3 +649,34 @@ palindrome(struct Node* head)
 
 	return 0;
 }
+
+
+int
+palindrome_stack(struct Node* head)
+{
+	int stack[10];
+	int sp = -1; // Full Ascending Stack
+	struct Node* slow = head;
+	struct Node* fast = head;
+	
+	while (fast != NULL && fast->next != NULL)
+	{
+		stack[++sp] = slow->data;
+		slow = slow->next;
+		fast = fast->next->next;
+	}
+
+	// Odd number of elements
+	if (fast != NULL)
+		slow = slow->next;
+
+	while (slow != NULL)
+	{
+		if (slow->data != stack[sp--])
+			return 0;
+
+		slow = slow->next;
+	}
+
+	return 1;
+}

@@ -248,16 +248,16 @@ main()
 	printf("\t===================================\n");
 	printf("\t=== CHECK IF LIST IS PALINDROME ===\n");
 	printf("\t===================================\n");
+	printf("\t           (Using Stack)           \n");
 	printf("\n\n");
 
 	printf("List:");
 	print_list(head);
 
-	int pal = palindrome(head);
+	int pal = palindrome_stack(head);
 
 	printf("\nAnswer:\n");
-	printf("\tThe list is %s a palindrome\n\n", pal ? "INDEED" : "NOT");
-
+	printf("\tThe List is %s a palindrome\n\n", pal ? "INDEED" : "NOT");
 
     return 0;
 }
