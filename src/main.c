@@ -174,20 +174,25 @@ main()
 
 	struct Node* head = NULL;
 	struct Node* tail = NULL; // Comment for TEST 0 to prevent Warning
-	
+	struct Node* next = NULL;
+
 	// TEST 0
 	// Works for Empty List
+	// int list_length = 0;
 
 	// TEST 1
 	// put(&head, 3, &tail);
+	// int list_length = 1;
 
 	// TEST 2
 	// put(&head, 3, &tail);
 	// put(&head, 5, &tail);
+	// int list_length = 2;
 
 	// TEST 3
 	// put(&head, 7, &tail);
 	// put(&head, 7, &tail);
+	// int list_length = 2;
 
 	// TEST 4
 	// put(&head, 3, &tail);
@@ -199,6 +204,7 @@ main()
 	// put(&head, 8, &tail);
 	// put(&head, 4, &tail);
 	// put(&head, 3, &tail);
+	// int list_length = 9;
 
 	// TEST 5
 	// put(&head, 3, &tail);
@@ -210,16 +216,20 @@ main()
 	// put(&head, 8, &tail);
 	// put(&head, 3, &tail);
 	// put(&head, 1, &tail);
+	// int list_length = 9;
+
 
 	// TEST 6
 	// put(&head, 5, &tail);
 	// put(&head, 7, &tail);
 	// put(&head, 2, &tail);
+	// int list_length = 3;
 
 	// TEST 7
 	// put(&head, 5, &tail);
 	// put(&head, 7, &tail);
 	// put(&head, 5, &tail);
+	// int list_length = 3;
 
 	// TEST 8
 	// put(&head, 8, &tail);
@@ -227,12 +237,14 @@ main()
 	// put(&head, 1, &tail);
 	// put(&head, 2, &tail);
 	// put(&head, 8, &tail);
+	// int list_length = 5;
 
 	// TEST 9
 	// put(&head, 6, &tail);
 	// put(&head, 3, &tail);
 	// put(&head, 3, &tail);
 	// put(&head, 6, &tail);
+	// int list_length = 4;
 
 	// TEST 10
 	put(&head, 5, &tail);
@@ -243,21 +255,25 @@ main()
 	put(&head, 4, &tail);
 	put(&head, 1, &tail);
 	put(&head, 5, &tail);
+	int list_length = 8;
 
 	printf("\n\n");
 	printf("\t===================================\n");
 	printf("\t=== CHECK IF LIST IS PALINDROME ===\n");
 	printf("\t===================================\n");
-	printf("\t           (Using Stack)           \n");
+	printf("\t           (Recursively)           \n");
 	printf("\n\n");
 
 	printf("List:");
 	print_list(head);
 
-	int pal = palindrome_stack(head);
+	if (head)
+		next = head->next;
+
+	int pal = palindrome_recursive(head, list_length, &next);
 
 	printf("\nAnswer:\n");
 	printf("\tThe List is %s a palindrome\n\n", pal ? "INDEED" : "NOT");
 
-    return 0;
+	return 0;
 }

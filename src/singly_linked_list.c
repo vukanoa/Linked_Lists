@@ -680,3 +680,31 @@ palindrome_stack(struct Node* head)
 
 	return 1;
 }
+
+
+int
+palindrome_recursive(struct Node* head, int length, struct Node** next)
+{
+	if (head == NULL || length <= 0)
+	{
+		(*next) = head;
+		return 1;
+	}
+	else if(length == 1)
+	{
+		(*next) = head->next;
+		return 1;
+	}
+
+	int result = palindrome_recursive(head->next, length-2, next);
+
+	if (!result || (*next) == NULL)
+		return 0;
+
+	if (head->data != (*next)->data)
+		return 0;
+	
+	(*next) = (*next)->next;
+
+	return 1;
+}

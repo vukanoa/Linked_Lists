@@ -40,5 +40,6 @@ void		 delete_middle_node		(struct Node* mid);
 struct Node* separate_around_value	(struct Node* head, int x);
 int			 palindrome				(struct Node* head);
 int			 palindrome_stack		(struct Node* head);
+int			 palindrome_recursive	(struct Node* head, int length, struct Node** next);
 
 #endif // SINGLY_LINKED_LIST_H
