@@ -38,5 +38,6 @@ void		 the_runner_technique	(struct Node* head);
 void		 remove_duplicates		(struct Node* head);
 void		 delete_middle_node		(struct Node* mid);
 struct Node* separate_around_value	(struct Node* head, int x);
+int			 palindrome				(struct Node* head);
 
 #endif // SINGLY_LINKED_LIST_H

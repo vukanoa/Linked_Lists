@@ -607,3 +607,45 @@ separate_around_value(struct Node* head, int x)
 
 	return front;
 }
+
+
+int
+palindrome(struct Node* head)
+{
+	if (head == NULL || head->next == NULL)
+		return 1; // Is Empty List a palindrome?
+
+	int num_of_digits = 9; // 0 indicates non-existance
+	int* array = (int*) calloc(num_of_digits, sizeof(int));
+	int counter = 1;
+
+	// O(n)
+	while (head != NULL)
+	{
+		array[head->data] = counter++;
+		
+		if (head->next != NULL && array[head->next->data] != 0)
+		{
+			if (head->next->data == head->data)
+				counter--;
+			else
+				counter -= 2; // In our example it gets back to 4
+
+			head = head->next;
+
+			while (head != NULL && counter > 0)
+			{
+				if (array[head->data] != counter--)
+					return 0;
+
+				head = head->next;
+			}
+			if (counter == 0)
+				return 1;
+		}
+
+		head = head->next;
+	}
+
+	return 0;
+}

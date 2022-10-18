@@ -177,78 +177,87 @@ main()
 	
 	// TEST 0
 	// Works for Empty List
-	// int x = 3;
 
 	// TEST 1
 	// put(&head, 3, &tail);
-	// put(&head, 2, &tail);
-	// put(&head, 6, &tail);
-	// put(&head, 7, &tail);
-	// put(&head, 4, &tail);
-	// put(&head, 1, &tail);
-	// put(&head, 5, &tail);
-	// put(&head, 2, &tail);
-	// put(&head, 3, &tail);
-	// put(&head, 8, &tail);
-	// int x = 6;
 
 	// TEST 2
-	// put(&head, 6, &tail);
+	// put(&head, 3, &tail);
 	// put(&head, 5, &tail);
-	// put(&head, 2, &tail);
-	// put(&head, 4, &tail);
-	// put(&head, 1, &tail);
-	// put(&head, 0, &tail);
-	// int x = 3;
 
 	// TEST 3
-	// put(&head, 6, &tail);
-	// put(&head, 2, &tail);
 	// put(&head, 7, &tail);
-	// put(&head, 3, &tail);
-	// put(&head, 5, &tail);
-	// put(&head, 5, &tail);
-	// put(&head, 1, &tail);
-	// int x = 5;
+	// put(&head, 7, &tail);
 
 	// TEST 4
-	// put(&head, 2, &tail);
-	// put(&head, 2, &tail);
-	// put(&head, 2, &tail);
-	// put(&head, 7, &tail);
 	// put(&head, 3, &tail);
-	// put(&head, 1, &tail);
-	// put(&head, 5, &tail);
+	// put(&head, 4, &tail);
+	// put(&head, 8, &tail);
+	// put(&head, 9, &tail);
 	// put(&head, 2, &tail);
-	// put(&head, 5, &tail);
-	// put(&head, 1, &tail);
-	// int x = 2;
+	// put(&head, 9, &tail);
+	// put(&head, 8, &tail);
+	// put(&head, 4, &tail);
+	// put(&head, 3, &tail);
 
 	// TEST 5
-	put(&head, 3, &tail);
+	// put(&head, 3, &tail);
+	// put(&head, 4, &tail);
+	// put(&head, 8, &tail);
+	// put(&head, 9, &tail);
+	// put(&head, 2, &tail);
+	// put(&head, 9, &tail);
+	// put(&head, 8, &tail);
+	// put(&head, 3, &tail);
+	// put(&head, 1, &tail);
+
+	// TEST 6
+	// put(&head, 5, &tail);
+	// put(&head, 7, &tail);
+	// put(&head, 2, &tail);
+
+	// TEST 7
+	// put(&head, 5, &tail);
+	// put(&head, 7, &tail);
+	// put(&head, 5, &tail);
+
+	// TEST 8
+	// put(&head, 8, &tail);
+	// put(&head, 2, &tail);
+	// put(&head, 1, &tail);
+	// put(&head, 2, &tail);
+	// put(&head, 8, &tail);
+
+	// TEST 9
+	// put(&head, 6, &tail);
+	// put(&head, 3, &tail);
+	// put(&head, 3, &tail);
+	// put(&head, 6, &tail);
+
+	// TEST 10
 	put(&head, 5, &tail);
-	put(&head, 2, &tail);
-	put(&head, 9, &tail);
 	put(&head, 1, &tail);
-	put(&head, 8, &tail);
-	int x = 4;
-
+	put(&head, 4, &tail);
+	put(&head, 6, &tail);
+	put(&head, 6, &tail);
+	put(&head, 4, &tail);
+	put(&head, 1, &tail);
+	put(&head, 5, &tail);
 
 	printf("\n\n");
-	printf("\t=============================\n");
-	printf("\t=== SEPARATE AROUND VALUE ===\n");
-	printf("\t=============================\n");
+	printf("\t===================================\n");
+	printf("\t=== CHECK IF LIST IS PALINDROME ===\n");
+	printf("\t===================================\n");
 	printf("\n\n");
 
-	printf("Before:");
+	printf("List:");
 	print_list(head);
 
-	printf("   Separate around value %d\n", x);
-	printf("   [Elements < %d to the Left, Elements >= %d to the Right]\n\n\n", x, x);
-	head = separate_around_value(head, x);
+	int pal = palindrome(head);
 
-	printf("After:");
-	print_list(head);
+	printf("\nAnswer:\n");
+	printf("\tThe list is %s a palindrome\n\n", pal ? "INDEED" : "NOT");
+
 
     return 0;
 }
