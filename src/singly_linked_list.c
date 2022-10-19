@@ -870,3 +870,114 @@ sum_lists(struct Node* a, struct Node* b)
 
 	return ret_head;
 }
+
+
+struct Node*
+beginning_of_loop(struct Node* head)
+{
+	struct Node* slow = head;
+	struct Node* fast = head;
+
+	/*
+		After k steps slow is at the start of the Loop
+		and fast is k steps into the loop.
+
+		That means they will meet after LOOP_SIZE - k turns.
+		And at that point they will be at exactly k nodes away from
+		the start of the Loop.
+	*/
+
+	// Detect if Linked List has a Loop
+	while (fast != NULL && fast->next != NULL)
+	{
+		slow = slow->next;
+		fast = fast->next->next;
+
+		if (slow == fast)
+			break;
+	}
+
+	// There is no Loop in the List
+	if (fast == NULL || fast->next == NULL)
+		return NULL;
+
+	/*
+		Move slow to head and keep fast at Meeting point. Each
+		are k steps from the Loop start. If they move at the same pace
+		they must meet at Loop start.
+	*/
+	slow = head;
+	while (slow != fast)
+	{
+		slow = slow->next;
+		fast = fast->next;
+	}
+
+	// Both now point to the start of the Loop
+	return slow;
+}
+
+
+void
+print_loop_list(struct Node* head)
+{
+	struct Node* slow = head;
+	struct Node* fast = head;
+
+	// For printing
+	struct Node* out  = head;
+
+	while (fast != NULL && fast->next != NULL)
+	{
+		slow = slow->next;
+		fast = fast->next->next;
+
+		if (slow == fast)
+			break;
+	}
+
+	// There is no Loop in the List
+	if (fast == NULL || fast->next == NULL)
+	{
+		printf("\n\tA List is not Loop!\n\n");
+		return;
+	}
+
+	// Find the Loop
+	slow = head;
+	while (slow != fast)
+	{
+		slow = slow->next;
+		fast = fast->next;
+	}
+
+	/*
+	   PRINTING
+	 */
+	printf("Loop List:");
+	printf("\n\t");
+
+	// Printing before Loop
+	while (out != slow)
+	{
+		printf("%d -> ", out->data);
+		out = out->next;
+	}
+
+	// Print the Looping Node
+	printf("|%d| -> ", out->data);
+
+	fast = fast->next;
+	// Printing the Loop
+	while (slow != fast)
+	{
+		printf("%d -> ", fast->data);
+		fast = fast->next;
+	}
+
+	// Print the Looping Node
+	if (slow->next == slow)
+		printf("|%d| -> |%d| -> |%d| -> ... \n\n", slow->data, slow->data, slow->data);
+	else
+		printf("|%d| -> %d -> %d -> ... \n\n", slow->data, slow->next->data, slow->next->next->data);
+}

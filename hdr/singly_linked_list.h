@@ -31,7 +31,8 @@ void swap(struct Node *a, struct Node *b);
 struct Node* sorted_merge	(struct Node* a, struct Node* b);
 struct Node* mid_node		(struct Node* head);
 struct Node* partition		(struct Node* left, struct Node* right);
-struct Node* __sum_lists	(struct Node*a, struct Node* b);
+struct Node* __sum_lists	(struct Node* a, struct Node* b);
+void print_loop_list		(struct Node* head);
 
 // List Problems
 struct Node* kth_to_last			(struct Node* head, int k);
@@ -44,5 +45,6 @@ int			 palindrome				(struct Node* head);
 int			 palindrome_stack		(struct Node* head);
 int			 palindrome_recursive	(struct Node* head, int length, struct Node** next);
 struct Node* intersection			(struct Node* a, struct Node* b);
+struct Node* beginning_of_loop		(struct Node* head);
 
 #endif // SINGLY_LINKED_LIST_H

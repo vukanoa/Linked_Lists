@@ -2,7 +2,7 @@
 #include "doubly_linked_list.h"
 #define HIGHEST_OPTION 13
 #define LOWEST_OPTION 0
-#define NO_INTERSECTION -1
+#define NO_LOOP -1
 
 void
 main_menu()
@@ -174,105 +174,67 @@ main()
 	// ------- TESTING -------
 	// -----------------------
 
-	struct Node* head_a = NULL;
-	struct Node* tail_a = NULL; // Comment for TEST 0 to prevent Warning
+	struct Node* head = NULL;
+	struct Node* tail = NULL; // Comment for TEST 0 to prevent Warning
 
-	struct Node* head_b = NULL;
-	struct Node* tail_b = NULL; // Comment for TEST 0 to prevent Warning
+	struct Node* loop_node = NULL;
 
 	// TEST 0
 	// Works for Emtpy Lists as well
 
+	// TEST 1
+	// put(&head, 1, &tail);
+	// put(&head, 2, &tail);
+	// put(&head, 3, &tail);
+	// put(&head, 4, &tail);
+	// put(&head, 5, &tail);
+	// No Loop
 
+	// TEST 2
+	// put(&head, 7, &tail);
+	// put(&head, 2, &tail);
+	// put(&head, 4, &tail);
+	// put(&head, 6, &tail);
+	// put(&head, 9, &tail);
+	// tail->next = head; // Make a Loop
 
-	// TEST 1					[ 697 + Emtpy = 697 | 7 -> 9 -> 6 ] 
-	// put(&head_a, 7, &tail_a);
-	// put(&head_a, 9, &tail_a);
-	// put(&head_a, 6, &tail_a);
+	// TEST 3
+	// put(&head, 8, &tail);
+	// put(&head, 3, &tail);
+	// put(&head, 1, &tail);
+	// put(&head, 4, &tail);
+	// put(&head, 5, &tail);
+	// tail->next = tail; // Make a Loop
 
-	// Empty
-
-
-
-	// TEST 2					[ 697 + 592 = 1289 | 9 -> 8 -> 2 -> 1 ] 
-	// put(&head_a, 7, &tail_a);
-	// put(&head_a, 9, &tail_a);
-	// put(&head_a, 6, &tail_a);
-
-	// put(&head_b, 2, &tail_b);
-	// put(&head_b, 9, &tail_b);
-	// put(&head_b, 5, &tail_b);
-
-
-
-	// TEST 3					[ 697 + 5 = 702 | 2 -> 0 -> 7 ] 
-	// put(&head_a, 7, &tail_a);
-	// put(&head_a, 9, &tail_a);
-	// put(&head_a, 6, &tail_a);
-
-	// put(&head_b, 5, &tail_b);
-
-
-
-	// TEST 4					[ 697 + 35 = 732 | 2 -> 3 -> 7 ]
-	// put(&head_a, 7, &tail_a);
-	// put(&head_a, 9, &tail_a);
-	// put(&head_a, 6, &tail_a);
-
-	// put(&head_b, 5, &tail_b);
-	// put(&head_b, 3, &tail_b);
-
-
-
-	// TEST 5					[ 697 + 435 = 1132 | 2 -> 3 -> 1 -> 1 ]
-	// put(&head_a, 7, &tail_a);
-	// put(&head_a, 9, &tail_a);
-	// put(&head_a, 6, &tail_a);
-
-	// put(&head_b, 5, &tail_b);
-	// put(&head_b, 3, &tail_b);
-	// put(&head_b, 4, &tail_b);
-
-
-
-	// TEST 6					[ 978 + 685 = 1663 | 3 -> 6 -> 6 -> 1 ]
-	// put(&head_a, 8, &tail_a);
-	// put(&head_a, 7, &tail_a);
-	// put(&head_a, 9, &tail_a);
-
-	// put(&head_b, 5, &tail_b);
-	// put(&head_b, 8, &tail_b);
-	// put(&head_b, 6, &tail_b);
-
-
-
-	// TEST 6					[ 978 + 31685 = 32663 | 3 -> 6 -> 6 -> 2 -> 3 ]
-	put(&head_a, 8, &tail_a);
-	put(&head_a, 7, &tail_a);
-	put(&head_a, 9, &tail_a);
-
-	put(&head_b, 5, &tail_b);
-	put(&head_b, 8, &tail_b);
-	put(&head_b, 6, &tail_b);
-	put(&head_b, 1, &tail_b);
-	put(&head_b, 3, &tail_b);
-
+	// TEST 4
+	put(&head, 1, &tail);
+	put(&head, 2, &tail);
+	put(&head, 3, &tail);
+	put(&head, 4, &tail);
+	put(&head, 5, &tail);
+	put(&head, 6, &tail);
+	put(&head, 7, &tail);
+	put(&head, 8, &tail);
+	tail->next = head->next->next->next; // tail->next = 4; // Make a Loop
 
 	printf("\n\n");
 	printf("\t=================================\n");
-	printf("\t=========== SUM LISTS ===========\n");
+	printf("\t======= BEGINNING OF LOOP =======\n");
 	printf("\t=================================\n");
 	printf("\n\n");
 
-	printf("List A:");
-	print_list(head_a);
+	loop_node = beginning_of_loop(head);
 
-	printf("List B:");
-	print_list(head_b);
+	printf("\tBeginning of Loop is at Node: %d\n\n", (loop_node) ? loop_node->data : NO_LOOP);
 
-	printf("\nSum:");
-	head_a = __sum_lists(head_a, head_b);
-	print_list(head_a);
+	if (!loop_node)
+	{
+		printf("\t[%d means => There is no Loop in the List!]\n", NO_LOOP);
+		printf("\nList:");
+		print_list(head);
+	}
+	else
+		print_loop_list(head);
 
 	return 0;
 }
