@@ -2,6 +2,7 @@
 #include "doubly_linked_list.h"
 #define HIGHEST_OPTION 13
 #define LOWEST_OPTION 0
+#define NO_INTERSECTION -1
 
 void
 main_menu()
@@ -172,108 +173,123 @@ main()
 	// ------- TESTING -------
 	// -----------------------
 
-	struct Node* head = NULL;
-	struct Node* tail = NULL; // Comment for TEST 0 to prevent Warning
-	struct Node* next = NULL;
+	struct Node* head_a = NULL;
+	struct Node* tail_a = NULL; // Comment for TEST 0 to prevent Warning
+
+	struct Node* head_b = NULL;
+	struct Node* tail_b = NULL; // Comment for TEST 0 to prevent Warning
 
 	// TEST 0
-	// Works for Empty List
-	// int list_length = 0;
+	// Works for Empty Lists as well
 
 	// TEST 1
-	// put(&head, 3, &tail);
-	// int list_length = 1;
+	// put(&head_b, 7, &tail_b);
 
 	// TEST 2
-	// put(&head, 3, &tail);
-	// put(&head, 5, &tail);
-	// int list_length = 2;
+	// put(&head_a, 1, &tail_a);
+	// put(&head_a, 2, &tail_a);
+	// put(&head_a, 3, &tail_a);
+	// put(&head_a, 4, &tail_a);
+	// put(&head_a, 5, &tail_a);
+
+	// put(&head_b, 7, &tail_b);
+	// put(&head_b, 8, &tail_b);
+	// put(&head_b, 9, &tail_b);
+	// tail_b->next = head_a->next->next;
 
 	// TEST 3
-	// put(&head, 7, &tail);
-	// put(&head, 7, &tail);
-	// int list_length = 2;
+	// put(&head_a, 1, &tail_a);
+	// put(&head_a, 2, &tail_a);
+	// put(&head_a, 3, &tail_a);
+	// put(&head_a, 4, &tail_a);
+	// put(&head_a, 5, &tail_a);
+
+	// put(&head_b, 6, &tail_b);
+	// put(&head_b, 0, &tail_b);
+	// put(&head_b, 1, &tail_b);
+	// put(&head_b, 7, &tail_b);
+	// put(&head_b, 8, &tail_b);
+	// put(&head_b, 9, &tail_b);
+	// tail_b->next = head_a->next->next;
 
 	// TEST 4
-	// put(&head, 3, &tail);
-	// put(&head, 4, &tail);
-	// put(&head, 8, &tail);
-	// put(&head, 9, &tail);
-	// put(&head, 2, &tail);
-	// put(&head, 9, &tail);
-	// put(&head, 8, &tail);
-	// put(&head, 4, &tail);
-	// put(&head, 3, &tail);
-	// int list_length = 9;
+	// put(&head_a, 1, &tail_a);
+	// put(&head_a, 2, &tail_a);
+	// put(&head_a, 3, &tail_a);
+	// put(&head_a, 4, &tail_a);
+	// put(&head_a, 5, &tail_a);
+
+	// put(&head_b, 1, &tail_b);
+	// put(&head_b, 2, &tail_b);
+	// put(&head_b, 3, &tail_b);
+	// put(&head_b, 4, &tail_b);
+	// put(&head_b, 5, &tail_b);
 
 	// TEST 5
-	// put(&head, 3, &tail);
-	// put(&head, 4, &tail);
-	// put(&head, 8, &tail);
-	// put(&head, 9, &tail);
-	// put(&head, 2, &tail);
-	// put(&head, 9, &tail);
-	// put(&head, 8, &tail);
-	// put(&head, 3, &tail);
-	// put(&head, 1, &tail);
-	// int list_length = 9;
-
+	// put(&head_a, 1, &tail_a);
+	// put(&head_b, 4, &tail_b);
+	// put(&head_b, 3, &tail_b);
 
 	// TEST 6
-	// put(&head, 5, &tail);
-	// put(&head, 7, &tail);
-	// put(&head, 2, &tail);
-	// int list_length = 3;
+	// put(&head_a, 3, &tail_a);
+	// head_b = head_a;
+	// tail_b = tail_a;
+	// put(&head_b, 4, &tail_b);
+	// put(&head_b, 5, &tail_b);
 
 	// TEST 7
-	// put(&head, 5, &tail);
-	// put(&head, 7, &tail);
-	// put(&head, 5, &tail);
-	// int list_length = 3;
+	// put(&head_a, 2, &tail_a);
+	// put(&head_a, 7, &tail_a);
+	// put(&head_a, 5, &tail_a);
 
 	// TEST 8
-	// put(&head, 8, &tail);
-	// put(&head, 2, &tail);
-	// put(&head, 1, &tail);
-	// put(&head, 2, &tail);
-	// put(&head, 8, &tail);
-	// int list_length = 5;
+	// put(&head_a, 1, &tail_a);
+	// put(&head_a, 2, &tail_a);
+	// put(&head_a, 3, &tail_a);
+	// put(&head_a, 4, &tail_a);
+	// put(&head_a, 5, &tail_a);
+
+	// put(&head_b, 6, &tail_b);
+	// put(&head_b, 1, &tail_b);
+	// put(&head_b, 7, &tail_b);
+	// put(&head_b, 8, &tail_b);
+	// put(&head_b, 9, &tail_b);
+	// tail_b->next = tail_a;
 
 	// TEST 9
-	// put(&head, 6, &tail);
-	// put(&head, 3, &tail);
-	// put(&head, 3, &tail);
-	// put(&head, 6, &tail);
-	// int list_length = 4;
+	put(&head_a, 2, &tail_a);
+	put(&head_a, 4, &tail_a);
+	put(&head_a, 3, &tail_a);
+	put(&head_a, 6, &tail_a);
+	put(&head_a, 4, &tail_a);
+	put(&head_a, 1, &tail_a);
+	put(&head_a, 5, &tail_a);
 
-	// TEST 10
-	put(&head, 5, &tail);
-	put(&head, 1, &tail);
-	put(&head, 4, &tail);
-	put(&head, 6, &tail);
-	put(&head, 6, &tail);
-	put(&head, 4, &tail);
-	put(&head, 1, &tail);
-	put(&head, 5, &tail);
-	int list_length = 8;
+	put(&head_b, 9, &tail_b);
+	put(&head_b, 3, &tail_b);
+	put(&head_b, 7, &tail_b);
+	put(&head_b, 8, &tail_b);
+	put(&head_b, 9, &tail_b);
+	tail_a->next = head_b->next->next->next;
 
 	printf("\n\n");
-	printf("\t===================================\n");
-	printf("\t=== CHECK IF LIST IS PALINDROME ===\n");
-	printf("\t===================================\n");
-	printf("\t           (Recursively)           \n");
+	printf("\t==================================\n");
+	printf("\t========== INTERSECTION ==========\n");
+	printf("\t==================================\n");
 	printf("\n\n");
 
-	printf("List:");
-	print_list(head);
+	printf("List A:");
+	print_list(head_a);
 
-	if (head)
-		next = head->next;
+	printf("List B:");
+	print_list(head_b);
 
-	int pal = palindrome_recursive(head, list_length, &next);
+	head_a = intersection(head_a, head_b);
+	printf("\n\tIntersection at Node: %d\n\n", head_a ? head_a->data : NO_INTERSECTION);
 
-	printf("\nAnswer:\n");
-	printf("\tThe List is %s a palindrome\n\n", pal ? "INDEED" : "NOT");
+	if (!head_a)
+		printf("\t[%d means => There is no intersection!]\n\n", NO_INTERSECTION);
+
 
 	return 0;
 }

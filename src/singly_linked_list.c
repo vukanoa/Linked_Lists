@@ -708,3 +708,50 @@ palindrome_recursive(struct Node* head, int length, struct Node** next)
 
 	return 1;
 }
+
+
+struct Node*
+intersection(struct Node* a, struct Node* b)
+{
+	if (a == NULL || b == NULL)
+		return NULL;
+	
+	// O(A + B) Time Complexity
+	// O(1)		Space Complexity
+	int counter_a = 0;
+	int counter_b = 0;
+	struct Node* head_a = a;
+	struct Node* head_b = b;
+
+	for(; a->next != NULL; a = a->next)
+		counter_a++;
+	
+	for(; b->next != NULL; b = b->next)
+		counter_b++;
+	
+	if (a != b)
+		return NULL; // There is no intersection
+
+
+	// Chop off the difference from the front of the longer List
+	if (counter_a > counter_b)
+	{
+		counter_a = counter_a - counter_b;
+		while (counter_a--)
+			head_a = head_a->next;
+	}
+	else
+	{
+		counter_b = counter_b - counter_a;
+		while (counter_b--)
+			head_b = head_b->next;
+	}
+
+	while(head_a != head_b)
+	{
+		head_a = head_a->next;
+		head_b = head_b->next;
+	}
+
+	return head_a;
+}
