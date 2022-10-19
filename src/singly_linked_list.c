@@ -22,7 +22,7 @@ push(struct Node** head, int data, struct Node** tail)
 		(*head) = tmp;
 	}
 
-	printf("\n\tElement %d has been pushed to List\n\n", data);
+	// printf("\n\tElement %d has been pushed to List\n\n", data);
 }
 
 
@@ -47,7 +47,7 @@ put(struct Node** head, int data, struct Node** tail)
        (*tail) = tmp;
    }
 
-   printf("\n\tElement %d has been put to List\n\n", data);
+   // printf("\n\tElement %d has been put to List\n\n", data);
 }
 
 
@@ -754,4 +754,119 @@ intersection(struct Node* a, struct Node* b)
 	}
 
 	return head_a;
+}
+
+
+struct Node*
+__sum_lists(struct Node* a, struct Node* b)
+{
+	int counter_a = 0;
+	int counter_b = 0;
+
+	struct Node* head_a   = a;
+	struct Node* tail_a   = NULL;
+
+	struct Node* head_b   = b;
+	struct Node* tail_b   = NULL;
+
+	for (;a != NULL; a = a->next)
+	{
+		counter_a++;
+		if (!a->next)
+			tail_a = a;
+
+	}
+
+	for (;b != NULL; b = b->next)
+	{
+		counter_b++;
+		if (!b->next)
+			tail_b = b;
+
+	}
+	
+	a = head_a;
+	b = head_b;
+	if (counter_a == counter_b)
+	{
+		return sum_lists(a, b);
+	}
+	else 
+	{
+		if (counter_a < counter_b)
+		{
+			counter_a = counter_b - counter_a;
+			while (counter_a--)
+				put(&a, 0, &tail_a);
+		}
+		else
+		{
+			counter_b = counter_a - counter_b;
+			while (counter_b--)
+				put(&b, 0, &tail_b);
+
+		}
+
+		return sum_lists(a, b);
+	}
+}
+
+
+struct Node*
+sum_lists(struct Node* a, struct Node* b)
+{
+	struct Node* head_a   = NULL;
+	struct Node* ret_head = NULL;
+	struct Node* current  = NULL;
+	struct Node* tmp	  = NULL;
+
+	int carry = 0;
+	head_a = a;
+	while (a != NULL)
+	{
+		if (a == head_a)
+		{
+			ret_head = (struct Node*) malloc(sizeof(struct Node));
+			ret_head->data = a->data + b->data;
+			ret_head->next = NULL;
+
+			if (ret_head->data >= 10)
+			{
+				carry = ret_head->data / 10;
+				ret_head->data %= 10;
+			}
+			current = ret_head;
+		}
+		else
+		{
+			tmp = (struct Node*) malloc(sizeof(struct Node));
+			tmp->data = carry + a->data + b->data;
+			tmp->next = NULL;
+
+			if (tmp->data >= 10)
+			{
+				carry = tmp->data / 10;
+				tmp->data %= 10;
+			}
+			else
+				carry = 0;
+
+			current->next = tmp;
+			current = current->next;
+		}
+
+		a = a->next;
+		b = b->next;
+	}
+
+	if (carry > 0)
+	{
+		tmp = (struct Node*) malloc(sizeof(struct Node));
+		tmp->data = carry;
+		tmp->next = NULL;
+
+		current->next = tmp;
+	}
+
+	return ret_head;
 }

@@ -166,6 +166,7 @@ main_menu()
 	}
 }
 
+
 int
 main()
 {
@@ -180,102 +181,87 @@ main()
 	struct Node* tail_b = NULL; // Comment for TEST 0 to prevent Warning
 
 	// TEST 0
-	// Works for Empty Lists as well
+	// Works for Emtpy Lists as well
 
-	// TEST 1
-	// put(&head_b, 7, &tail_b);
 
-	// TEST 2
-	// put(&head_a, 1, &tail_a);
-	// put(&head_a, 2, &tail_a);
-	// put(&head_a, 3, &tail_a);
-	// put(&head_a, 4, &tail_a);
-	// put(&head_a, 5, &tail_a);
 
-	// put(&head_b, 7, &tail_b);
-	// put(&head_b, 8, &tail_b);
-	// put(&head_b, 9, &tail_b);
-	// tail_b->next = head_a->next->next;
-
-	// TEST 3
-	// put(&head_a, 1, &tail_a);
-	// put(&head_a, 2, &tail_a);
-	// put(&head_a, 3, &tail_a);
-	// put(&head_a, 4, &tail_a);
-	// put(&head_a, 5, &tail_a);
-
-	// put(&head_b, 6, &tail_b);
-	// put(&head_b, 0, &tail_b);
-	// put(&head_b, 1, &tail_b);
-	// put(&head_b, 7, &tail_b);
-	// put(&head_b, 8, &tail_b);
-	// put(&head_b, 9, &tail_b);
-	// tail_b->next = head_a->next->next;
-
-	// TEST 4
-	// put(&head_a, 1, &tail_a);
-	// put(&head_a, 2, &tail_a);
-	// put(&head_a, 3, &tail_a);
-	// put(&head_a, 4, &tail_a);
-	// put(&head_a, 5, &tail_a);
-
-	// put(&head_b, 1, &tail_b);
-	// put(&head_b, 2, &tail_b);
-	// put(&head_b, 3, &tail_b);
-	// put(&head_b, 4, &tail_b);
-	// put(&head_b, 5, &tail_b);
-
-	// TEST 5
-	// put(&head_a, 1, &tail_a);
-	// put(&head_b, 4, &tail_b);
-	// put(&head_b, 3, &tail_b);
-
-	// TEST 6
-	// put(&head_a, 3, &tail_a);
-	// head_b = head_a;
-	// tail_b = tail_a;
-	// put(&head_b, 4, &tail_b);
-	// put(&head_b, 5, &tail_b);
-
-	// TEST 7
-	// put(&head_a, 2, &tail_a);
+	// TEST 1					[ 697 + Emtpy = 697 | 7 -> 9 -> 6 ] 
 	// put(&head_a, 7, &tail_a);
-	// put(&head_a, 5, &tail_a);
+	// put(&head_a, 9, &tail_a);
+	// put(&head_a, 6, &tail_a);
 
-	// TEST 8
-	// put(&head_a, 1, &tail_a);
-	// put(&head_a, 2, &tail_a);
-	// put(&head_a, 3, &tail_a);
-	// put(&head_a, 4, &tail_a);
-	// put(&head_a, 5, &tail_a);
+	// Empty
 
-	// put(&head_b, 6, &tail_b);
-	// put(&head_b, 1, &tail_b);
-	// put(&head_b, 7, &tail_b);
-	// put(&head_b, 8, &tail_b);
+
+
+	// TEST 2					[ 697 + 592 = 1289 | 9 -> 8 -> 2 -> 1 ] 
+	// put(&head_a, 7, &tail_a);
+	// put(&head_a, 9, &tail_a);
+	// put(&head_a, 6, &tail_a);
+
+	// put(&head_b, 2, &tail_b);
 	// put(&head_b, 9, &tail_b);
-	// tail_b->next = tail_a;
+	// put(&head_b, 5, &tail_b);
 
-	// TEST 9
-	put(&head_a, 2, &tail_a);
-	put(&head_a, 4, &tail_a);
-	put(&head_a, 3, &tail_a);
-	put(&head_a, 6, &tail_a);
-	put(&head_a, 4, &tail_a);
-	put(&head_a, 1, &tail_a);
-	put(&head_a, 5, &tail_a);
 
-	put(&head_b, 9, &tail_b);
-	put(&head_b, 3, &tail_b);
-	put(&head_b, 7, &tail_b);
+
+	// TEST 3					[ 697 + 5 = 702 | 2 -> 0 -> 7 ] 
+	// put(&head_a, 7, &tail_a);
+	// put(&head_a, 9, &tail_a);
+	// put(&head_a, 6, &tail_a);
+
+	// put(&head_b, 5, &tail_b);
+
+
+
+	// TEST 4					[ 697 + 35 = 732 | 2 -> 3 -> 7 ]
+	// put(&head_a, 7, &tail_a);
+	// put(&head_a, 9, &tail_a);
+	// put(&head_a, 6, &tail_a);
+
+	// put(&head_b, 5, &tail_b);
+	// put(&head_b, 3, &tail_b);
+
+
+
+	// TEST 5					[ 697 + 435 = 1132 | 2 -> 3 -> 1 -> 1 ]
+	// put(&head_a, 7, &tail_a);
+	// put(&head_a, 9, &tail_a);
+	// put(&head_a, 6, &tail_a);
+
+	// put(&head_b, 5, &tail_b);
+	// put(&head_b, 3, &tail_b);
+	// put(&head_b, 4, &tail_b);
+
+
+
+	// TEST 6					[ 978 + 685 = 1663 | 3 -> 6 -> 6 -> 1 ]
+	// put(&head_a, 8, &tail_a);
+	// put(&head_a, 7, &tail_a);
+	// put(&head_a, 9, &tail_a);
+
+	// put(&head_b, 5, &tail_b);
+	// put(&head_b, 8, &tail_b);
+	// put(&head_b, 6, &tail_b);
+
+
+
+	// TEST 6					[ 978 + 31685 = 32663 | 3 -> 6 -> 6 -> 2 -> 3 ]
+	put(&head_a, 8, &tail_a);
+	put(&head_a, 7, &tail_a);
+	put(&head_a, 9, &tail_a);
+
+	put(&head_b, 5, &tail_b);
 	put(&head_b, 8, &tail_b);
-	put(&head_b, 9, &tail_b);
-	tail_a->next = head_b->next->next->next;
+	put(&head_b, 6, &tail_b);
+	put(&head_b, 1, &tail_b);
+	put(&head_b, 3, &tail_b);
+
 
 	printf("\n\n");
-	printf("\t==================================\n");
-	printf("\t========== INTERSECTION ==========\n");
-	printf("\t==================================\n");
+	printf("\t=================================\n");
+	printf("\t=========== SUM LISTS ===========\n");
+	printf("\t=================================\n");
 	printf("\n\n");
 
 	printf("List A:");
@@ -284,12 +270,9 @@ main()
 	printf("List B:");
 	print_list(head_b);
 
-	head_a = intersection(head_a, head_b);
-	printf("\n\tIntersection at Node: %d\n\n", head_a ? head_a->data : NO_INTERSECTION);
-
-	if (!head_a)
-		printf("\t[%d means => There is no intersection!]\n\n", NO_INTERSECTION);
-
+	printf("\nSum:");
+	head_a = __sum_lists(head_a, head_b);
+	print_list(head_a);
 
 	return 0;
 }
