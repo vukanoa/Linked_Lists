@@ -95,7 +95,7 @@ erase(struct Node** head, int data, struct Node** tail)
 		{
 			if (cur == ((*head)))
 				((*head)) = cur->next;
-			else // Ovde mora da se obradi i tail
+			else
 			{
 				if (cur == (*tail))
 					(*tail) = prev;
@@ -166,20 +166,19 @@ reverse_list(struct Node** head)
 	printf("\tPrevious order:");
 	print_list(*head);
 
-	struct Node* p, *q, *r;
-	p = NULL;
-	q = (*head);
-	r = (*head)->next;
+	struct Node* prev = NULL;
+	struct Node* cur  = (*head);
+	struct Node* next = NULL;
 
-	while (r != NULL)
+	while (cur != NULL)
 	{
-		q->next = p;
-		p = q;
-		q = r;
-		r = q->next;
-		q->next = p;
+		next = cur->next;
+		cur->next = prev;
+		prev = cur;
+		cur = next;
 	}
-	(*head) = q;
+
+	(*head) = prev;
 
 	printf("\tCurrent order:");
 	print_list(*head);
@@ -335,7 +334,7 @@ bubble_sort(struct Node* head)
 
 
 void
-merge_sort(struct Node** head) // 5 2 4
+merge_sort(struct Node** head)
 {
 	// O(n * logn)
 	if ((*head) == NULL || (*head)->next == NULL)
@@ -436,7 +435,6 @@ quick_sort(struct Node* head, struct Node* tail)
 	quick_sort(pivot->next, tail);
 }
 
-// 2 8 7
 
 struct Node*
 partition(struct Node* left, struct Node* right)
@@ -508,7 +506,7 @@ the_runner_technique(struct Node* head)
 		return;
 	
 	if (head->next->next == NULL) // We're told there are even number of nodes
-		return; //Already alternating
+		return; // Already alternating
 
 	struct Node* slow = head;
 	struct Node* fast = head->next;
@@ -629,7 +627,7 @@ palindrome(struct Node* head)
 			if (head->next->data == head->data)
 				counter--;
 			else
-				counter -= 2; // In our example it gets back to 4
+				counter -= 2;
 
 			head = head->next;
 
@@ -717,7 +715,7 @@ intersection(struct Node* a, struct Node* b)
 		return NULL;
 	
 	// O(A + B) Time Complexity
-	// O(1)		Space Complexity
+	// O(1)     Space Complexity
 	int counter_a = 0;
 	int counter_b = 0;
 	struct Node* head_a = a;
@@ -951,9 +949,7 @@ print_loop_list(struct Node* head)
 		fast = fast->next;
 	}
 
-	/*
-	   PRINTING
-	 */
+	/* PRINTING */
 	printf("Loop List:");
 	printf("\n\t");
 
@@ -980,4 +976,46 @@ print_loop_list(struct Node* head)
 		printf("|%d| -> |%d| -> |%d| -> ... \n\n", slow->data, slow->data, slow->data);
 	else
 		printf("|%d| -> %d -> %d -> ... \n\n", slow->data, slow->next->data, slow->next->next->data);
+}
+
+
+void
+swap_every_two(struct Node** head)
+{
+	// Base case
+	if ((*head) == NULL || (*head)->next == NULL)
+		return;
+
+	// Initialize
+	struct Node* left  = (*head);
+	struct Node* right = (*head)->next->next;
+	struct Node* left_prev = NULL;
+
+	while (right != NULL)
+	{
+		struct Node* between  = left->next;
+		struct Node* right_next = right->next;
+
+		left->next = right_next;
+		between->next = left;
+
+		right->next = between;
+
+		if ((*head) == left)
+			(*head) = right;
+		else
+			left_prev->next = right;
+
+		// Swap left and right pointers
+		between = left;
+		left = right;
+		right = between;
+
+		// Prepare for the next
+		left_prev = left;
+		left = left->next;
+		right = right->next;
+	}
+
+	printf("\n\tEvery two nodes have been swapped!\n\n");
 }

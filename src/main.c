@@ -1,6 +1,6 @@
 #include "singly_linked_list.h"
 #include "doubly_linked_list.h"
-#define HIGHEST_OPTION 13
+#define HIGHEST_OPTION 14
 #define LOWEST_OPTION 0
 #define NO_LOOP -1
 
@@ -33,6 +33,7 @@ main_menu()
 		printf("\t   11. Merge Sort a list\n");
 		printf("\t   12. Quick Sort a list\n");
 		printf("\t   13. Destroy a list\n");
+		printf("\t   14. Swap every two nodes in a list\n");
 		printf("\t    0. Exit\n");
 
 		printf("\n: ");
@@ -159,6 +160,10 @@ main_menu()
 				destroy_list(&head);
 				break;
 
+			case 14: 
+				swap_every_two(&head);
+				break;
+
 			case 0:
 				option = 0;
 				continue;
@@ -174,67 +179,7 @@ main()
 	// ------- TESTING -------
 	// -----------------------
 
-	struct Node* head = NULL;
-	struct Node* tail = NULL; // Comment for TEST 0 to prevent Warning
-
-	struct Node* loop_node = NULL;
-
-	// TEST 0
-	// Works for Emtpy Lists as well
-
-	// TEST 1
-	// put(&head, 1, &tail);
-	// put(&head, 2, &tail);
-	// put(&head, 3, &tail);
-	// put(&head, 4, &tail);
-	// put(&head, 5, &tail);
-	// No Loop
-
-	// TEST 2
-	// put(&head, 7, &tail);
-	// put(&head, 2, &tail);
-	// put(&head, 4, &tail);
-	// put(&head, 6, &tail);
-	// put(&head, 9, &tail);
-	// tail->next = head; // Make a Loop
-
-	// TEST 3
-	// put(&head, 8, &tail);
-	// put(&head, 3, &tail);
-	// put(&head, 1, &tail);
-	// put(&head, 4, &tail);
-	// put(&head, 5, &tail);
-	// tail->next = tail; // Make a Loop
-
-	// TEST 4
-	put(&head, 1, &tail);
-	put(&head, 2, &tail);
-	put(&head, 3, &tail);
-	put(&head, 4, &tail);
-	put(&head, 5, &tail);
-	put(&head, 6, &tail);
-	put(&head, 7, &tail);
-	put(&head, 8, &tail);
-	tail->next = head->next->next->next; // tail->next = 4; // Make a Loop
-
-	printf("\n\n");
-	printf("\t=================================\n");
-	printf("\t======= BEGINNING OF LOOP =======\n");
-	printf("\t=================================\n");
-	printf("\n\n");
-
-	loop_node = beginning_of_loop(head);
-
-	printf("\tBeginning of Loop is at Node: %d\n\n", (loop_node) ? loop_node->data : NO_LOOP);
-
-	if (!loop_node)
-	{
-		printf("\t[%d means => There is no Loop in the List!]\n", NO_LOOP);
-		printf("\nList:");
-		print_list(head);
-	}
-	else
-		print_loop_list(head);
+	main_menu();
 
 	return 0;
 }
