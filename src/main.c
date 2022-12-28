@@ -114,7 +114,7 @@ main_menu()
 				break;
 
 			case 6:
-				reverse_list(&head);	
+				reverse_list(&head);
 				break;
 
 			case 7:
@@ -156,11 +156,11 @@ main_menu()
 
 				break;
 
-			case 13: 
+			case 13:
 				destroy_list(&head);
 				break;
 
-			case 14: 
+			case 14:
 				swap_every_two(&head);
 				break;
 

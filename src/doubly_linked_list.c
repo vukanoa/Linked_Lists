@@ -2,6 +2,7 @@
 #include <time.h>
 #include "doubly_linked_list.h"
 
+/* Doubly Linked List Functions */
 void
 d_push(struct d_Node** head, int data, struct d_Node** tail)
 {
@@ -257,6 +258,7 @@ d_destroy_list(struct d_Node** head)
 }
 
 
+/* Doubly Linked List Sorts */
 void
 d_merge_sort_old(struct d_Node** head)
 {
@@ -299,6 +301,23 @@ d_merge_sort_new(struct d_Node* head)
 }
 
 
+void
+d_quick_sort(struct d_Node* front, struct d_Node* right)
+{
+	// Base case
+	if (front == NULL || right == NULL)
+		return;
+
+	if (front == right || front->prev == right || right->next == front)
+		return;
+
+	struct d_Node* pivot = d_partition(front, right);
+	d_quick_sort(front, pivot->prev);
+	d_quick_sort(pivot->next, right);
+}
+
+
+/* Util Functions */
 struct d_Node*
 d_sorted_merge(struct d_Node* a, struct d_Node* b)
 {
@@ -338,7 +357,7 @@ d_sorted_merge(struct d_Node* a, struct d_Node* b)
 		tail->next = b;
 	else
 		tail->next = a;
-	
+
 	return ret_head;
 }
 
@@ -356,22 +375,6 @@ d_mid_node(struct d_Node* head)
 	}
 
 	return slow;
-}
-
-
-void
-d_quick_sort(struct d_Node* front, struct d_Node* right)
-{
-	// Base case
-	if (front == NULL || right == NULL)
-		return;
-
-	if (front == right || front->prev == right || right->next == front)
-		return;
-	
-	struct d_Node* pivot = d_partition(front, right);
-	d_quick_sort(front, pivot->prev);
-	d_quick_sort(pivot->next, right);
 }
 
 
@@ -558,5 +561,4 @@ swap_pointers(struct d_Node** head, struct d_Node** left, struct d_Node** right,
 		(*left) = (*right);
 		(*right) = tmp;
 	}
-	
 }
