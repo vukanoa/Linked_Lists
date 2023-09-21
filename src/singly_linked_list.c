@@ -152,7 +152,10 @@ print_list(struct Node* head)
 
     while (cur)
     {
-        printf("%d ", cur->data);
+		if (cur->next)
+			printf("%d -> ", cur->data);
+		else
+			printf("%d", cur->data);
 
         cur = cur->next;
     }
@@ -465,61 +468,6 @@ partition(struct Node* left, struct Node* right)
 }
 
 
-struct Node*
-__sum_lists(struct Node* a, struct Node* b)
-{
-	int counter_a = 0;
-	int counter_b = 0;
-
-	struct Node* head_a   = a;
-	struct Node* tail_a   = NULL;
-
-	struct Node* head_b   = b;
-	struct Node* tail_b   = NULL;
-
-	for (;a != NULL; a = a->next)
-	{
-		counter_a++;
-		if (!a->next)
-			tail_a = a;
-
-	}
-
-	for (;b != NULL; b = b->next)
-	{
-		counter_b++;
-		if (!b->next)
-			tail_b = b;
-
-	}
-
-	a = head_a;
-	b = head_b;
-	if (counter_a == counter_b)
-	{
-		return sum_lists(a, b);
-	}
-	else
-	{
-		if (counter_a < counter_b)
-		{
-			counter_a = counter_b - counter_a;
-			while (counter_a--)
-				put(&a, 0, &tail_a);
-		}
-		else
-		{
-			counter_b = counter_a - counter_b;
-			while (counter_b--)
-				put(&b, 0, &tail_b);
-
-		}
-
-		return sum_lists(a, b);
-	}
-}
-
-
 void
 print_loop_list(struct Node* head)
 {
@@ -732,63 +680,95 @@ separate_around_value(struct Node* head, int x)
 }
 
 
+/*
+	===================
+	=== Description ===
+	===================
+
+	You are given two non-empty linked lists representing two non-negative
+	integers. The digits are stored in reverse order, and each of their nodes
+	contains a single digit. Add the two numbers and return the sum as a linked
+	list.
+
+	You may assume the two numbers do not contain any leading zero, except the
+	number 0 itself.
+
+	Example 1:
+	Input:  l1 = [2,4,3], l2 = [5,6,4]
+	Output: [7,0,8]
+	Explanation: 342 + 465 = 807.
+
+	Example 2:
+	Input:  l1 = [2,4,3], l2 = [5,6]
+	Output: [7,0,4]
+	Explanation: 342 + 65 = 407
+
+	Example 3: (This illustrates the importance of carry)
+	Input:  l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+	Output: [8,9,9,9,0,0,0,1]
+
+	Example 4:
+	Input:  l1 = [4,3], l2 = [5,6,4]
+	Output: [9,4,4]
+	Explanation: 34 + 465 = 499
+
+	Example 5:
+	Input:  l1 = [7], l2 = []
+	Output: [7]
+
+	Example 6:
+	Input:  l1 = [], l2 = [5]
+	Output: [5]
+
+	Example 7:
+	Input:  l1 = [], l2 = []
+	Output: []
+
+*/
+/* Time  Complexity: O(n + m) */
+/* Space Complexity: O(1) */
 struct Node*
-sum_lists(struct Node* a, struct Node* b)
+add_two_numbers(struct Node* l1, struct Node* l2)
 {
-	struct Node* head_a   = NULL;
-	struct Node* ret_head = NULL;
-	struct Node* current  = NULL;
-	struct Node* tmp	  = NULL;
+	if (!l1 && !l2)
+		return NULL;
+	else if (!l1)
+		return l2;
+	else if (!l2)
+		return l1;
+
+	struct Node* dummy = (struct Node*) malloc(sizeof(struct Node*));
+	struct Node* tail  = dummy;
 
 	int carry = 0;
-	head_a = a;
-	while (a != NULL)
+	while (l1 || l2 || carry)
 	{
-		if (a == head_a)
-		{
-			ret_head = (struct Node*) malloc(sizeof(struct Node));
-			ret_head->data = a->data + b->data;
-			ret_head->next = NULL;
+		int l1_data = l1 ? l1->data : 0;
+		int l2_data = l2 ? l2->data : 0;
 
-			if (ret_head->data >= 10)
-			{
-				carry = ret_head->data / 10;
-				ret_head->data %= 10;
-			}
-			current = ret_head;
-		}
-		else
-		{
-			tmp = (struct Node*) malloc(sizeof(struct Node));
-			tmp->data = carry + a->data + b->data;
-			tmp->next = NULL;
+		int data = l1_data + l2_data + carry;
 
-			if (tmp->data >= 10)
-			{
-				carry = tmp->data / 10;
-				tmp->data %= 10;
-			}
-			else
-				carry = 0;
+		carry = data / 10;
+		data %= 10;
 
-			current->next = tmp;
-			current = current->next;
-		}
+		tail->next = (struct Node*) malloc(sizeof(struct Node*));
+		tail->next->data = data;
+		tail = tail->next;
 
-		a = a->next;
-		b = b->next;
+		l1 = l1 ? l1->next : NULL;
+		l2 = l2 ? l2->next : NULL;
 	}
 
-	if (carry > 0)
-	{
-		tmp = (struct Node*) malloc(sizeof(struct Node));
-		tmp->data = carry;
-		tmp->next = NULL;
+	/* We could just end our Solution here, but that would cause Memory Leak */
+	// return dummy->next;
 
-		current->next = tmp;
-	}
+	/* Prevent Memory Leak */
+	struct Node* tmp = dummy;
+	dummy = dummy->next;
 
-	return ret_head;
+	free(tmp);
+	
+	return dummy;
 }
 
 

@@ -39,7 +39,7 @@ void         the_runner_technique  (struct Node* head);
 void         remove_duplicates     (struct Node* head);
 void         delete_middle_node    (struct Node* mid);
 struct Node* separate_around_value (struct Node* head, int x);
-struct Node* sum_lists             (struct Node* a, struct Node* b);
+struct Node* add_two_numbers       (struct Node* a, struct Node* b);
 int          palindrome            (struct Node* head);
 int          palindrome_stack      (struct Node* head);
 int          palindrome_recursive  (struct Node* head, int length, struct Node** next);
